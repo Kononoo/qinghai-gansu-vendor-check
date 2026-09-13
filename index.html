@@ -7,120 +7,145 @@
 <style>
 /* 取色自这条线本身：青海湖的蓝、祁连的草、戈壁的赭、丹霞的赤，落在一层晒过的沙上 */
 :root{
-  --ground:#FAF4EB; --surface:#FFFCF7; --surface-2:#F2E9DB; --sunken:#EDE2D2;
+  --ground:#FAF5EC; --surface:#FFFCF7; --surface-2:#F3EADC; --sunken:#EDE3D3;
   --ink:#2A211C; --ink-2:#5C4C42; --ink-3:#8B7868;
-  --line:#DCCDB8; --line-soft:#EADFCE;
-  --accent:#1C5A7A; --accent-soft:#DCE9EF;
-  --danger:#B4491F; --danger-soft:#F8E3D8;
+  --line:#DFD1BD; --line-soft:#EDE3D4;
+  --accent:#1C5A7A; --accent-soft:#DEEAF0;
+  --danger:#B4491F; --danger-soft:#F8E4D9;
   --warn:#B07C22; --good:#4A7C4E;
-  /* 评分维度色 = 丹霞层理，由深到浅 */
   --d1:#1C5A7A; --d2:#2E7D8C; --d3:#4A7C4E; --d4:#B07C22; --d5:#B4491F;
-  --shadow:0 1px 2px rgba(80,54,34,.06), 0 12px 30px -22px rgba(80,54,34,.5);
+  --sky:rgba(28,90,122,.07); --sand:rgba(176,124,34,.05);
+  --shadow:0 1px 2px rgba(80,54,34,.05), 0 14px 34px -26px rgba(80,54,34,.55);
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --ground:#191411; --surface:#221B17; --surface-2:#2C231D; --sunken:#141010;
+    --ground:#171310; --surface:#211A16; --surface-2:#2B221C; --sunken:#120F0D;
     --ink:#F2E8DC; --ink-2:#C2B0A0; --ink-3:#94806F;
-    --line:#3D3129; --line-soft:#2E2620;
-    --accent:#78BEDC; --accent-soft:#17323E;
-    --danger:#E8865C; --danger-soft:#3A211A;
+    --line:#3E3229; --line-soft:#2C241E;
+    --accent:#78BEDC; --accent-soft:#16323E;
+    --danger:#E8865C; --danger-soft:#38201A;
     --warn:#DCAC55; --good:#86BE8B;
     --d1:#78BEDC; --d2:#6FB8C4; --d3:#86BE8B; --d4:#DCAC55; --d5:#E8865C;
-    --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 30px -22px rgba(0,0,0,.95);
+    --sky:rgba(120,190,220,.07); --sand:rgba(220,172,85,.04);
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 14px 34px -26px rgba(0,0,0,1);
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --ground:#191411; --surface:#221B17; --surface-2:#2C231D; --sunken:#141010;
+  --ground:#171310; --surface:#211A16; --surface-2:#2B221C; --sunken:#120F0D;
   --ink:#F2E8DC; --ink-2:#C2B0A0; --ink-3:#94806F;
-  --line:#3D3129; --line-soft:#2E2620;
-  --accent:#78BEDC; --accent-soft:#17323E;
-  --danger:#E8865C; --danger-soft:#3A211A;
+  --line:#3E3229; --line-soft:#2C241E;
+  --accent:#78BEDC; --accent-soft:#16323E;
+  --danger:#E8865C; --danger-soft:#38201A;
   --warn:#DCAC55; --good:#86BE8B;
   --d1:#78BEDC; --d2:#6FB8C4; --d3:#86BE8B; --d4:#DCAC55; --d5:#E8865C;
-  --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 30px -22px rgba(0,0,0,.95);
+  --sky:rgba(120,190,220,.07); --sand:rgba(220,172,85,.04);
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 14px 34px -26px rgba(0,0,0,1);
   color-scheme:dark;
 }
 
 *{box-sizing:border-box}
-body{background:var(--ground);color:var(--ink);
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  background:
+    radial-gradient(130% 52% at 50% -6%, var(--sky), transparent 62%),
+    radial-gradient(100% 40% at 88% 108%, var(--sand), transparent 60%),
+    var(--ground);
+  background-attachment:fixed;
+  color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
-  font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased}
-.wrap{max-width:940px;margin:0 auto;padding:44px 22px 96px}
+  font-size:15px;line-height:1.78;-webkit-font-smoothing:antialiased;
+}
 .mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
 
-/* ── 抬头 ── */
-.strata{display:flex;height:5px;margin:0 0 22px;border-radius:1px;overflow:hidden}
-.strata i{flex:1;display:block}
-.strata i:nth-child(1){background:var(--d1);flex:1.6}
-.strata i:nth-child(2){background:var(--d2)}
-.strata i:nth-child(3){background:var(--d3);flex:1.3}
-.strata i:nth-child(4){background:var(--d4);flex:1.8}
-.strata i:nth-child(5){background:var(--d5)}
-.masthead{border-bottom:2px solid var(--ink);padding-bottom:20px;margin-bottom:26px}
-.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--ink-3);display:flex;flex-wrap:wrap;gap:6px 18px;margin-bottom:13px}
-h1{font-family:"Noto Serif SC","Songti SC",serif;font-weight:700;font-size:clamp(30px,5.6vw,44px);
-  line-height:1.22;margin:0 0 11px;text-wrap:balance;letter-spacing:-.015em}
-.dek{color:var(--ink-2);font-size:16px;max-width:58ch;margin:0}
+/* ══ 骨架：左标题栏 + 正文 ══ */
+.shell{max-width:1120px;margin:0 auto;padding:40px 26px 100px;
+  display:grid;grid-template-columns:196px minmax(0,1fr);gap:52px;align-items:start}
+.rail{position:sticky;top:34px}
+.railmark{display:flex;gap:3px;height:34px;margin-bottom:18px}
+.railmark i{flex:1;display:block;border-radius:1px;opacity:.9}
+.railmark i:nth-child(1){background:var(--d1);flex:1.5}
+.railmark i:nth-child(2){background:var(--d2)}
+.railmark i:nth-child(3){background:var(--d3);flex:1.3}
+.railmark i:nth-child(4){background:var(--d4);flex:1.7}
+.railmark i:nth-child(5){background:var(--d5)}
+.railtitle{font-family:"Noto Serif SC",serif;font-weight:700;font-size:15px;line-height:1.4;margin:0 0 3px}
+.railsub{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-3);margin:0 0 20px;line-height:1.7}
+.rail nav ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--line)}
+.rail nav a{display:block;padding:6px 0 6px 14px;margin-left:-1px;border-left:2px solid transparent;
+  color:var(--ink-3);text-decoration:none;font-size:13px;line-height:1.45;transition:color .18s,border-color .18s}
+.rail nav a:hover{color:var(--ink)}
+.rail nav a.on{color:var(--ink);font-weight:600;border-left-color:var(--accent)}
+.rail nav a span{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--ink-3);
+  margin-right:7px;font-weight:400}
+.rail nav a.on span{color:var(--accent)}
+
+/* ══ 抬头 ══ */
+.masthead{border-bottom:2px solid var(--ink);padding-bottom:20px;margin-bottom:28px}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);display:flex;flex-wrap:wrap;gap:5px 18px;margin-bottom:13px}
+h1{font-family:"Noto Serif SC","Songti SC",serif;font-weight:700;font-size:clamp(31px,5.4vw,45px);
+  line-height:1.2;margin:0 0 11px;text-wrap:balance;letter-spacing:-.018em}
+.dek{color:var(--ink-2);font-size:15.5px;max-width:56ch;margin:0}
 
 .verdict{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);
-  padding:22px 24px;margin:0 0 42px;box-shadow:var(--shadow)}
-.verdict h2{margin:0 0 12px;font-size:12.5px;letter-spacing:.11em;text-transform:uppercase;
+  padding:22px 26px;margin:0 0 48px;box-shadow:var(--shadow)}
+.verdict h2{margin:0 0 12px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
   font-family:"IBM Plex Mono",monospace;color:var(--accent);font-weight:600}
 .verdict p{margin:0 0 11px}.verdict p:last-child{margin-bottom:0}
 
-section{margin:0 0 48px}
-h2.sec{font-family:"Noto Serif SC","Songti SC",serif;font-weight:600;font-size:23px;
-  margin:0 0 6px;letter-spacing:-.008em;text-wrap:balance}
+section{margin:0 0 52px;scroll-margin-top:26px}
+h2.sec{font-family:"Noto Serif SC","Songti SC",serif;font-weight:600;font-size:24px;
+  margin:0 0 6px;letter-spacing:-.01em;text-wrap:balance}
 .sec-note{color:var(--ink-3);font-size:13.5px;margin:0 0 20px;max-width:64ch}
-h3{font-size:16px;margin:28px 0 8px;font-weight:700}
+h3{font-size:16px;margin:30px 0 9px;font-weight:700}
 
-/* ── 评分榜 ── */
-.board{border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow)}
-.row{display:grid;grid-template-columns:168px 1fr 68px;gap:16px;align-items:center;
-  padding:16px 20px;border-bottom:1px solid var(--line-soft)}
+/* ══ 评分榜 ══ */
+.board{border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow);border-radius:2px;overflow:hidden}
+.boardhead{padding:12px 20px;background:var(--surface-2);border-bottom:1px solid var(--line);
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);display:grid;grid-template-columns:172px 1fr 66px;gap:16px}
+.boardhead span:last-child{text-align:right}
+.row{display:grid;grid-template-columns:172px 1fr 66px;gap:16px;align-items:center;
+  padding:15px 20px;border-bottom:1px solid var(--line-soft)}
 .row:last-of-type{border-bottom:0}
 .row.win{background:var(--accent-soft)}
-.rname{min-width:0}
 .rname b{display:block;font-size:14.5px;font-weight:700;line-height:1.4}
 .rname small{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5;margin-top:1px}
-.bar{display:flex;height:24px;background:var(--sunken);border-radius:2px;overflow:hidden}
+.bar{display:flex;height:22px;background:var(--sunken);border-radius:2px;overflow:hidden}
 .bar i{display:block;height:100%}
 .s1{background:var(--d1)}.s2{background:var(--d2)}.s3{background:var(--d3)}
 .s4{background:var(--d4)}.s5{background:var(--d5)}
-.tot{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;
-  text-align:right;font-size:26px;font-weight:700;line-height:1;letter-spacing:-.03em}
-.tot em{display:block;font-style:normal;font-size:10.5px;font-weight:400;color:var(--ink-3);margin-top:3px;letter-spacing:.04em}
-.boardhead,.boardfoot{padding:13px 20px;background:var(--surface-2);font-family:"IBM Plex Mono",monospace;
-  font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
-.boardhead{border-bottom:1px solid var(--line);display:grid;grid-template-columns:168px 1fr 68px;gap:16px}
-.boardhead span:last-child{text-align:right}
-.boardfoot{border-top:1px solid var(--line);text-transform:none;letter-spacing:0;font-size:12.5px;
-  font-family:inherit;color:var(--ink-2);line-height:1.65}
+.tot{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;text-align:right;
+  font-size:27px;font-weight:700;line-height:1;letter-spacing:-.035em}
+.tot em{display:block;font-style:normal;font-size:10px;font-weight:400;color:var(--ink-3);margin-top:4px;letter-spacing:.05em}
+.boardfoot{padding:14px 20px;background:var(--surface-2);border-top:1px solid var(--line);
+  font-size:12.5px;color:var(--ink-2);line-height:1.7}
 
-.legend{display:flex;flex-wrap:wrap;gap:6px 20px;margin:16px 0 0;padding:0;list-style:none}
+.legend{display:flex;flex-wrap:wrap;gap:7px 20px;margin:16px 0 0;padding:0;list-style:none}
 .legend li{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink-2)}
-.legend i{width:11px;height:11px;flex:none;border-radius:1px}
+.legend i{width:10px;height:10px;flex:none;border-radius:1px}
 .legend b{font-weight:600;color:var(--ink)}
-.legend span{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3)}
+.legend span{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--ink-3)}
 
-/* 评分口径 */
-.rubric{display:grid;gap:1px;background:var(--line-soft);border:1px solid var(--line);margin-top:20px}
-.rub{background:var(--surface);padding:14px 16px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start}
-.rub .tag{width:4px;align-self:stretch;border-radius:2px}
-.rub h4{margin:0 0 3px;font-size:13.5px;font-weight:700}
-.rub h4 span{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:500;color:var(--ink-3);margin-left:7px}
-.rub p{margin:0;font-size:12.5px;color:var(--ink-2);line-height:1.6}
+.rubric{display:grid;gap:1px;background:var(--line-soft);border:1px solid var(--line);margin-top:22px;border-radius:2px;overflow:hidden}
+.rub{background:var(--surface);padding:13px 16px;display:grid;grid-template-columns:4px 1fr;gap:13px;align-items:start}
+.rub .tag{align-self:stretch;border-radius:2px}
+.rub h4{margin:0 0 2px;font-size:13.5px;font-weight:700}
+.rub h4 span{font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:500;color:var(--ink-3);margin-left:8px}
+.rub p{margin:0;font-size:12.5px;color:var(--ink-2);line-height:1.65}
 
-/* ── 明细表 ── */
-.tablewrap{overflow-x:auto;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow)}
-table{border-collapse:collapse;width:100%;min-width:800px;font-size:13.5px}
-thead th{text-align:left;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.09em;
+/* ══ 表 ══ */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);background:var(--surface);
+  box-shadow:var(--shadow);border-radius:2px}
+table{border-collapse:collapse;width:100%;min-width:790px;font-size:13.5px}
+thead th{text-align:left;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;
   text-transform:uppercase;color:var(--ink-3);font-weight:500;padding:12px 14px;
   border-bottom:1px solid var(--line);white-space:nowrap;background:var(--surface-2)}
-tbody td{padding:14px;border-bottom:1px solid var(--line-soft);vertical-align:top;line-height:1.6}
+tbody td{padding:14px;border-bottom:1px solid var(--line-soft);vertical-align:top;line-height:1.62}
 tbody tr:last-child td{border-bottom:0}
 .who{font-weight:700;font-size:14px;white-space:nowrap}
 .who small{display:block;font-weight:400;color:var(--ink-3);font-size:11.5px;margin-top:2px;white-space:normal}
@@ -128,191 +153,207 @@ td.num{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
 td.num b{font-size:15px;white-space:nowrap}
 td.num em{display:block;font-style:normal;color:var(--ink-3);font-size:11.5px;margin-top:2px}
 .lic{display:flex;gap:9px;align-items:flex-start}
-.lic .b{width:3px;flex:none;align-self:stretch;min-height:32px;border-radius:2px}
+.lic .b{width:3px;flex:none;align-self:stretch;min-height:30px;border-radius:2px}
 .lic--ok .b{background:var(--good)}.lic--no .b{background:var(--danger)}.lic--none .b{background:var(--line)}
 .lic .t{font-size:12.5px;line-height:1.55}
 .lic code{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:var(--good)}
 .lic--no .t strong{color:var(--danger)}
-.flaw{font-size:12.5px;color:var(--ink-2);line-height:1.6}
+.flaw{font-size:12.5px;color:var(--ink-2);line-height:1.62}
 .pill{display:inline-block;font-size:11px;font-weight:600;padding:2px 7px;white-space:nowrap;
   background:var(--danger-soft);color:var(--danger)}
 
-/* ── 其它块 ── */
-.dossier{border:1px solid var(--danger);background:var(--danger-soft)}
-.dossier header{padding:18px 22px 14px;border-bottom:1px solid rgba(160,58,38,.25)}
-.dossier header h3{margin:0 0 4px;font-size:18px;color:var(--danger);font-weight:700}
-.dossier header p{margin:0;font-size:13.5px;color:var(--ink-2)}
-.dossier ol{margin:0;padding:16px 22px 20px 40px;display:grid;gap:11px}
-.dossier li{font-size:14px;line-height:1.7}
+/* ══ 其它 ══ */
+.dossier{border:1px solid var(--danger);background:var(--danger-soft);border-radius:2px;overflow:hidden}
+.dossier header{padding:17px 22px 13px;border-bottom:1px solid rgba(180,73,31,.24)}
+.dossier header h3{margin:0 0 3px;font-size:17.5px;color:var(--danger);font-weight:700}
+.dossier header p{margin:0;font-size:13px;color:var(--ink-2)}
+.dossier ol{margin:0;padding:15px 22px 19px 38px;display:grid;gap:10px}
+.dossier li{font-size:13.5px;line-height:1.7}
 
-.clock{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(232px,1fr))}
-.tick{background:var(--surface);border:1px solid var(--line-soft);border-top:3px solid var(--danger);padding:16px}
-.tick .when{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;letter-spacing:.06em;
-  color:var(--danger);display:block;margin-bottom:6px}
+.clock{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(228px,1fr))}
+.tick{background:var(--surface);border:1px solid var(--line-soft);border-top:3px solid var(--danger);
+  padding:15px 16px;border-radius:2px}
+.tick .when{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:600;letter-spacing:.06em;
+  color:var(--danger);display:block;margin-bottom:5px}
 .tick .what{font-weight:700;display:block;margin-bottom:5px;font-size:15px}
-.tick .why{color:var(--ink-2);font-size:13.5px;line-height:1.65}
+.tick .why{color:var(--ink-2);font-size:13px;line-height:1.65}
 
-.steps{counter-reset:s;display:grid;gap:1px;border:1px solid var(--line);background:var(--line-soft)}
-.step{background:var(--surface);padding:16px 18px 16px 56px;position:relative;counter-increment:s}
-.step::before{content:counter(s,decimal-leading-zero);position:absolute;left:18px;top:16px;
-  font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:var(--accent)}
+.steps{counter-reset:s;display:grid;gap:1px;border:1px solid var(--line);
+  background:var(--line-soft);border-radius:2px;overflow:hidden}
+.step{background:var(--surface);padding:15px 18px 15px 54px;position:relative;counter-increment:s}
+.step::before{content:counter(s,decimal-leading-zero);position:absolute;left:18px;top:15px;
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:600;color:var(--accent)}
 .step b{display:block;margin-bottom:3px;font-size:14.5px}
-.step span{color:var(--ink-2);font-size:13.5px;line-height:1.65;display:block}
+.step span{color:var(--ink-2);font-size:13px;line-height:1.68;display:block}
 
-.panel{border:1px solid var(--line);background:var(--surface);padding:20px 22px;box-shadow:var(--shadow)}
-.panel > p{margin:0 0 12px}.panel > p:last-child{margin-bottom:0}
-.quote{border-left:2px solid var(--line);padding:2px 0 2px 16px;margin:14px 0;
-  color:var(--ink-2);font-size:13.5px;line-height:1.7}
-.sources{background:var(--surface-2);border:1px solid var(--line-soft);padding:18px 20px}
-.sources h3{margin:0 0 10px;font-size:12px;font-family:"IBM Plex Mono",monospace;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--ink-3);font-weight:500}
-.sources ul{margin:0;padding-left:17px;display:grid;gap:8px}
-.sources li{font-size:13px;color:var(--ink-2);line-height:1.6}
+.panel{border:1px solid var(--line);background:var(--surface);padding:20px 22px;
+  box-shadow:var(--shadow);border-radius:2px}
+.panel > p{margin:0 0 11px;font-size:14px}.panel > p:last-child{margin-bottom:0}
+.quote{border-left:2px solid var(--danger);padding:3px 0 3px 16px;margin:14px 0;
+  color:var(--ink-2);font-size:13px;line-height:1.7}
+.sources{background:var(--surface-2);border:1px solid var(--line-soft);padding:18px 20px;border-radius:2px}
+.sources ul{margin:0;padding-left:17px;display:grid;gap:9px}
+.sources li{font-size:13px;color:var(--ink-2);line-height:1.65}
 footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);
   color:var(--ink-3);font-size:12.5px;line-height:1.7}
-a{color:var(--accent)}a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:1px}
 
+@media (max-width:900px){
+  .shell{grid-template-columns:1fr;gap:0;padding:26px 18px 76px}
+  .rail{position:static;margin-bottom:26px}
+  .railmark{height:5px;margin-bottom:14px}
+  .railtitle,.railsub{display:none}
+  .rail nav ol{display:flex;gap:0;overflow-x:auto;border-left:0;border-bottom:1px solid var(--line);
+    padding-bottom:0;-webkit-overflow-scrolling:touch}
+  .rail nav a{white-space:nowrap;padding:8px 14px 9px;border-left:0;border-bottom:2px solid transparent;margin:0}
+  .rail nav a.on{border-left-color:transparent;border-bottom-color:var(--accent)}
+  .rail nav a span{display:none}
+  section{scroll-margin-top:12px}
+}
 @media (max-width:640px){
-  .wrap{padding:30px 16px 72px}
-  .row,.boardhead{grid-template-columns:1fr 56px;gap:10px}
+  .row,.boardhead{grid-template-columns:1fr 54px;gap:10px}
   .row .bar{grid-column:1/-1;order:3}
   .boardhead span:nth-child(2){display:none}
-  .dossier ol{padding-left:36px}
+  .dossier ol{padding-left:34px}
 }
 </style>
 
-<div class="wrap">
+<div class="shell">
 
-<div class="strata" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+<aside class="rail">
+  <div class="railmark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  <p class="railtitle">国庆青甘选团核查</p>
+  <p class="railsub">6 人 · 六家<br>核查至 09-13</p>
+  <nav aria-label="目录">
+    <ol>
+      <li><a href="#r1"><span>01</span>结论</a></li>
+      <li><a href="#r2"><span>02</span>评分榜</a></li>
+      <li><a href="#r3"><span>03</span>六家明细</a></li>
+      <li><a href="#r4"><span>04</span>德华为何 13 分</a></li>
+      <li><a href="#r5"><span>05</span>三件急事</a></li>
+      <li><a href="#r6"><span>06</span>付款前七步</a></li>
+      <li><a href="#r7"><span>07</span>莫高窟</a></li>
+      <li><a href="#r8"><span>08</span>证据边界</a></li>
+    </ol>
+  </nav>
+</aside>
+
+<main>
 
 <header class="masthead">
   <div class="eyebrow">
     <span>2026 国庆 · 青甘大环线</span>
-    <span>6 人 · 10/01 抵西宁 · 10/08 返程</span>
-    <span>核查截至 09-13</span>
+    <span>10/01 抵西宁 · 10/08 返程</span>
   </div>
   <h1>六家青甘团，钱该给谁</h1>
-  <p class="dek">群里转进来的六家报价全部读完，外加三轮独立核查（36 个调查单元，每条结论配一名独立复核者尝试反驳）。</p>
+  <p class="dek">群里转进来的六家报价全部读完，外加三轮独立核查——36 个调查单元，每条结论配一名独立复核者尝试反驳。</p>
 </header>
 
-<div class="verdict">
-  <h2>结论</h2>
-  <p><strong>选寻风，别选德华。</strong>寻风是六家里唯一能在青海省文旅厅 733 家旅行社名录里查到经营主体的（<span class="mono">L-QH-100489</span>，在业）；德华的「喜致旅游」在该名录与另外五条独立渠道上<strong>全部零结果</strong>，而它定金最高、报价最高。</p>
-  <p><strong>选定之后还有两件事要先办：</strong>打 <span class="mono">0971-3598024</span> 向寻风公司座机核实「寻风小唐」确是他家的人；以及要求把 5 天 4 晚换成它自家的 <strong>6 天 5 晚</strong> 重新报价。</p>
-</div>
+<section id="r1">
+  <div class="verdict">
+    <h2>结论</h2>
+    <p><strong>选寻风，别选德华。</strong>寻风是六家里唯一能在青海省文旅厅 733 家旅行社名录里查到经营主体的（<span class="mono">L-QH-100489</span>，在业）；德华的「喜致旅游」在该名录与另外五条独立渠道上<strong>全部零结果</strong>，而它定金最高、报价最高。</p>
+    <p><strong>定下之后先办两件事：</strong>打 <span class="mono">0971-3598024</span> 向寻风公司座机核实「寻风小唐」确是他家的人；要求把 5 天 4 晚换成它自家的 <strong>6 天 5 晚</strong> 重新报价。</p>
+  </div>
+</section>
 
-<section>
+<section id="r2">
   <h2 class="sec">评分榜</h2>
-  <p class="sec-note">五个维度、满分 50。条形的长度就是得分，颜色分段显示分从哪来——看得出寻风赢在主体与交付，小杰的分几乎全来自付款结构。</p>
+  <p class="sec-note">五个维度、满分 50。条形长度就是得分，颜色分段显示分从哪来——寻风赢在主体与交付，小杰那 20 分几乎全由付款结构贡献。</p>
 
   <div class="board">
     <div class="boardhead"><span>销售</span><span>得分构成</span><span>总分</span></div>
 
     <div class="row win">
       <div class="rname"><b>寻风小唐</b><small>青海寻风国际旅行社</small></div>
-      <div class="bar" role="img" aria-label="寻风 47 分：主体15 合同8 付款10 交付10 口径4">
-        <i class="s1" style="width:30%" title="主体可核验 15/15"></i>
-        <i class="s2" style="width:16%" title="合同 8/10"></i>
-        <i class="s3" style="width:20%" title="付款结构 10/10"></i>
-        <i class="s4" style="width:20%" title="交付可验收 10/10"></i>
-        <i class="s5" style="width:8%" title="口径诚实 4/5"></i>
+      <div class="bar" role="img" aria-label="寻风 47 分：主体 15、合同 8、付款 10、交付 10、口径 4">
+        <i class="s1" style="width:30%" title="主体可核验 15/15"></i><i class="s2" style="width:16%" title="合同 8/10"></i><i class="s3" style="width:20%" title="付款结构 10/10"></i><i class="s4" style="width:20%" title="交付可验收 10/10"></i><i class="s5" style="width:8%" title="口径诚实 4/5"></i>
       </div>
       <div class="tot">47<em>/ 50</em></div>
     </div>
 
     <div class="row">
       <div class="rname"><b>西北领队港港</b><small>@自游行旅游</small></div>
-      <div class="bar" role="img" aria-label="港港 30 分：主体6 合同4 付款8 交付8 口径4">
-        <i class="s1" style="width:12%" title="主体可核验 6/15"></i>
-        <i class="s2" style="width:8%" title="合同 4/10"></i>
-        <i class="s3" style="width:16%" title="付款结构 8/10"></i>
-        <i class="s4" style="width:16%" title="交付可验收 8/10"></i>
-        <i class="s5" style="width:8%" title="口径诚实 4/5"></i>
+      <div class="bar" role="img" aria-label="港港 30 分：主体 6、合同 4、付款 8、交付 8、口径 4">
+        <i class="s1" style="width:12%" title="主体可核验 6/15"></i><i class="s2" style="width:8%" title="合同 4/10"></i><i class="s3" style="width:16%" title="付款结构 8/10"></i><i class="s4" style="width:16%" title="交付可验收 8/10"></i><i class="s5" style="width:8%" title="口径诚实 4/5"></i>
       </div>
       <div class="tot">30<em>/ 50</em></div>
     </div>
 
     <div class="row">
       <div class="rname"><b>A西北旅游定制-小杰</b><small>无公司名</small></div>
-      <div class="bar" role="img" aria-label="小杰 20 分：主体0 合同0 付款10 交付6 口径4">
-        <i class="s3" style="width:20%" title="付款结构 10/10"></i>
-        <i class="s4" style="width:12%" title="交付可验收 6/10"></i>
-        <i class="s5" style="width:8%" title="口径诚实 4/5"></i>
+      <div class="bar" role="img" aria-label="小杰 20 分：付款 10、交付 6、口径 4">
+        <i class="s3" style="width:20%" title="付款结构 10/10"></i><i class="s4" style="width:12%" title="交付可验收 6/10"></i><i class="s5" style="width:8%" title="口径诚实 4/5"></i>
       </div>
       <div class="tot">20<em>/ 50</em></div>
     </div>
 
     <div class="row">
       <div class="rname"><b>青甘定制师_德华</b><small>@喜致旅游</small></div>
-      <div class="bar" role="img" aria-label="德华 13 分：主体3 合同6 付款2 交付2 口径0">
-        <i class="s1" style="width:6%" title="主体可核验 3/15"></i>
-        <i class="s2" style="width:12%" title="合同 6/10"></i>
-        <i class="s3" style="width:4%" title="付款结构 2/10"></i>
-        <i class="s4" style="width:4%" title="交付可验收 2/10"></i>
+      <div class="bar" role="img" aria-label="德华 13 分：主体 3、合同 6、付款 2、交付 2、口径 0">
+        <i class="s1" style="width:6%" title="主体可核验 3/15"></i><i class="s2" style="width:12%" title="合同 6/10"></i><i class="s3" style="width:4%" title="付款结构 2/10"></i><i class="s4" style="width:4%" title="交付可验收 2/10"></i>
       </div>
       <div class="tot">13<em>/ 50</em></div>
     </div>
 
     <div class="row">
       <div class="rname"><b>阿凯</b><small>无公司名</small></div>
-      <div class="bar" role="img" aria-label="阿凯 12 分：主体0 合同4 付款0 交付8 口径0">
-        <i class="s2" style="width:8%" title="合同 4/10"></i>
-        <i class="s4" style="width:16%" title="交付可验收 8/10"></i>
+      <div class="bar" role="img" aria-label="阿凯 12 分：合同 4、交付 8">
+        <i class="s2" style="width:8%" title="合同 4/10"></i><i class="s4" style="width:16%" title="交付可验收 8/10"></i>
       </div>
       <div class="tot">12<em>/ 50</em></div>
     </div>
 
     <div class="row">
       <div class="rname"><b>西北旅游领队-小唐</b><small>无公司名 · 与寻风小唐无关</small></div>
-      <div class="bar" role="img" aria-label="小唐 9 分：主体0 合同0 付款6 交付2 口径1">
-        <i class="s3" style="width:12%" title="付款结构 6/10"></i>
-        <i class="s4" style="width:4%" title="交付可验收 2/10"></i>
-        <i class="s5" style="width:2%" title="口径诚实 1/5"></i>
+      <div class="bar" role="img" aria-label="小唐 9 分：付款 6、交付 2、口径 1">
+        <i class="s3" style="width:12%" title="付款结构 6/10"></i><i class="s4" style="width:4%" title="交付可验收 2/10"></i><i class="s5" style="width:2%" title="口径诚实 1/5"></i>
       </div>
       <div class="tot">9<em>/ 50</em></div>
     </div>
 
     <div class="boardfoot">
-      <strong>价格不计分。</strong>六家的天数、含几晚住宿、含不含首道门票、含不含景区小交通口径全不一样——在统一口径之前，任何「谁更便宜」的排序都是编的。报价原文见下表，比价要等六家按同一张清单重报之后。
+      <strong>价格不计分。</strong>六家的天数、含几晚住宿、含不含首道门票、含不含景区小交通口径全不一样——统一之前，任何「谁更便宜」的排序都是编的。报价原文见下表。
     </div>
   </div>
 
   <ul class="legend">
-    <li><i style="background:var(--d1)"></i><b>主体可核验</b><span>×3　满分15</span></li>
-    <li><i style="background:var(--d2)"></i><b>合同</b><span>×2　满分10</span></li>
-    <li><i style="background:var(--d3)"></i><b>付款结构</b><span>×2　满分10</span></li>
-    <li><i style="background:var(--d4)"></i><b>交付可验收</b><span>×2　满分10</span></li>
-    <li><i style="background:var(--d5)"></i><b>口径诚实</b><span>×1　满分5</span></li>
+    <li><i style="background:var(--d1)"></i><b>主体可核验</b><span>×3 · 15</span></li>
+    <li><i style="background:var(--d2)"></i><b>合同</b><span>×2 · 10</span></li>
+    <li><i style="background:var(--d3)"></i><b>付款结构</b><span>×2 · 10</span></li>
+    <li><i style="background:var(--d4)"></i><b>交付可验收</b><span>×2 · 10</span></li>
+    <li><i style="background:var(--d5)"></i><b>口径诚实</b><span>×1 · 5</span></li>
   </ul>
 
   <h3>每一分是怎么给的</h3>
   <div class="rubric">
     <div class="rub"><span class="tag" style="background:var(--d1)"></span><div>
-      <h4>主体可核验<span>权重 ×3 —— 出事之后你找谁</span></h4>
-      <p><b>5 分</b>：官方名录命中、许可证号可查、在业。<b>2 分</b>：给了机构名但名录 0 命中。<b>1 分</b>：给了机构名且多渠道全零。<b>0 分</b>：从未给过公司名——这不是「我没查到」，是他们没提供可查的对象。</p>
+      <h4>主体可核验<span>×3 —— 出事之后你找谁</span></h4>
+      <p><b>5</b> 官方名录命中、许可证号可查、在业　<b>2</b> 给了机构名但名录 0 命中　<b>1</b> 给了机构名且多渠道全零　<b>0</b> 从未给过公司名（不是「查不到」，是没有可查的对象）</p>
     </div></div>
     <div class="rub"><span class="tag" style="background:var(--d2)"></span><div>
-      <h4>合同<span>权重 ×2 —— 承诺能不能变成可执行文本</span></h4>
-      <p><b>5 分</b>：明确正规电子合同、可在监管平台查编号。<b>3 分</b>：承诺签但形式含糊、或落地才签。<b>2 分</b>：口头承诺签电子合同但无资质支撑。<b>0 分</b>：全程未提合同。</p>
+      <h4>合同<span>×2 —— 承诺能不能变成可执行文本</span></h4>
+      <p><b>5</b> 正规电子合同、可在监管平台查编号　<b>3</b> 承诺签但形式含糊，或落地才签　<b>2</b> 口头称签电子合同却无资质支撑　<b>0</b> 全程未提</p>
     </div></div>
     <div class="rub"><span class="tag" style="background:var(--d3)"></span><div>
-      <h4>付款结构<span>权重 ×2 —— 钱在你手里待多久</span></h4>
-      <p><b>5 分</b>：分段付款、尾款落地后结、定金低且写明退还条件。<b>3 分</b>：定金低、转对公、口头称可退。<b>1 分</b>：定金最高且无任何退款条件。<b>0 分</b>：出发前先付大头。</p>
+      <h4>付款结构<span>×2 —— 钱在你手里待多久</span></h4>
+      <p><b>5</b> 分段付款、尾款落地后结、定金低且写明退还条件　<b>3</b> 定金低、转对公、口头称可退　<b>1</b> 定金最高且无退款条件　<b>0</b> 出发前先付大头</p>
     </div></div>
     <div class="rub"><span class="tag" style="background:var(--d4)"></span><div>
-      <h4>交付可验收<span>权重 ×2 —— 有没有能写进合同的具体物</span></h4>
-      <p><b>5 分</b>：逐日行程 ＋ 逐城具名酒店 ＋ 逐项门票与景交单价。<b>3–4 分</b>：三样里有一两样。<b>1 分</b>：只有可选池、没有承诺。<b>0 分</b>：什么都没有。</p>
+      <h4>交付可验收<span>×2 —— 有没有能写进合同的具体物</span></h4>
+      <p><b>5</b> 逐日行程 ＋ 逐城具名酒店 ＋ 逐项门票与景交单价　<b>3–4</b> 三样里有一两样　<b>1</b> 只有可选池、没有承诺　<b>0</b> 什么都没有</p>
     </div></div>
     <div class="rub"><span class="tag" style="background:var(--d5)"></span><div>
-      <h4>口径诚实<span>权重 ×1 —— 书面和口头对不对得上</span></h4>
-      <p><b>扣分项</b>：书面与口头矛盾、虚构原价、反向涨价、稀缺话术、用国家示范文本明令禁止的「准 4 星」「豪华」描述住宿、把不去的景点写成「门口打卡更划算」。<b>加分项</b>：主动披露不利事实、主动点破行业套路。</p>
+      <h4>口径诚实<span>×1 —— 书面和口头对不对得上</span></h4>
+      <p><b>扣</b> 书面与口头矛盾、虚构原价、反向涨价、稀缺话术、用国家示范文本禁用的「准 4 星」「豪华」描述住宿　<b>加</b> 主动披露不利事实、主动点破行业套路</p>
     </div></div>
   </div>
 </section>
 
-<section>
+<section id="r3">
   <h2 class="sec">六家明细</h2>
-  <p class="sec-note">左侧竖条对应评分榜的第一个维度。价格栏只放各家报价原文，不做换算。</p>
+  <p class="sec-note">左侧竖条对应评分的第一个维度。价格栏只放各家报价原文，不做换算。</p>
   <div class="tablewrap">
     <table>
       <thead><tr><th>销售</th><th>报价原文</th><th>主体</th><th>定金与付款</th><th>最该盯的那处</th></tr></thead>
@@ -322,7 +363,7 @@ a{color:var(--accent)}a:focus-visible{outline:2px solid var(--accent);outline-of
           <td class="num"><b>A 3180</b><em>B 2980（含必要小交通）</em><em>C 2580（仅车＋酒店）</em><em>逐景点公布门票与景交单价</em></td>
           <td><div class="lic lic--ok"><span class="b"></span><span class="t">
             青海寻风国际旅行社有限公司<br><code>L-QH-100489</code> · 在业<br>
-            <span style="color:var(--ink-3)">名录序号 144 · 座机 0971-3598024</span></span></div></td>
+            <span style="color:var(--ink-3)">名录序号 144 · 0971-3598024</span></span></div></td>
           <td class="flaw">200/位，<strong>三段式</strong>：定金 → 落地付 50% → 最后一天付清。出发前两天有问题秒退。正规电子合同。六家里唯一含<strong>个人意外险</strong>。</td>
           <td class="flaw">5 天 4 晚是它自家<strong>最短的 SKU</strong>，砍掉察尔汗和黑独山——而它同时卖 6天5晚 和 7天6晚。<strong>直接要 6天5晚 重新报价。</strong>另：「自营车队」实为合作司机池，车型与领队出发前一天才定。</td>
         </tr>
@@ -333,7 +374,7 @@ a{color:var(--accent)}a:focus-visible{outline:2px solid var(--accent);outline-of
             签名「@自游行旅游」<br><strong>青海名录 0 命中</strong><br>
             <span style="color:var(--ink-3)">全国同名持牌主体在新疆</span></span></div></td>
           <td class="flaw">100/人，转对公账户、可开收据、称随时可退。但合同是<strong>落地西宁才签</strong>。</td>
-          <td class="flaw">报价最低且按 6 人算，住宿老实写「三钻」不吹准四，莫高窟票种讲得最细。但<strong>零可追溯履约记录</strong>，小红书上对应账号处于平台风险标记状态。7 座车 6 客＋1 司机满座，<strong>行李没地方放</strong>。</td>
+          <td class="flaw">报价最低且按 6 人算，住宿老实写「三钻」不吹准四，莫高窟票种讲得最细。但<strong>零可追溯履约记录</strong>，小红书对应账号处于平台风险标记状态。7 座车 6 客＋1 司机满座，<strong>行李没地方放</strong>。</td>
         </tr>
         <tr>
           <td class="who">A西北旅游定制-小杰<small>西北 6 天 5 晚 · 6 人</small></td>
@@ -369,50 +410,50 @@ a{color:var(--accent)}a:focus-visible{outline:2px solid var(--accent);outline-of
             <span class="pill">没给过公司名</span><br>
             <span style="color:var(--ink-3)">但称「打公司对公账户、开公司收据」</span></span></div></td>
           <td class="flaw">100/人对公账户、开收据、「计划有变可退」。<strong>全程没提过合同。</strong></td>
-          <td class="flaw">「🏨准 4 星⭐酒店」名单里混着<strong>汉庭、锦江之星、星程、维也纳</strong>；列了 6 个城市却只住 5 晚，是可选池不是承诺。全程<strong>没给过逐日行程</strong>，也<strong>没提过景交</strong>。</td>
+          <td class="flaw">「准 4 星酒店」名单里混着<strong>汉庭、锦江之星、星程、维也纳</strong>；列了 6 城却只住 5 晚，是可选池不是承诺。全程<strong>没给过逐日行程</strong>，也<strong>没提过景交</strong>。</td>
         </tr>
       </tbody>
     </table>
   </div>
 </section>
 
-<section>
+<section id="r4">
   <h2 class="sec">德华：为什么 13 分</h2>
-  <p class="sec-note">这家目前是群里的意向。以下每条都有可追溯来源。</p>
+  <p class="sec-note">这家目前是群里的意向。每条都有可追溯来源。</p>
   <div class="dossier">
     <header>
       <h3>报价最高、定金最高、主体六渠道零结果</h3>
-      <p>它是唯一一家宣传口径最重（40 万 MPV、品控员、绩效考核）却连公司名都对不上任何公开记录的。</p>
+      <p>唯一一家宣传口径最重（40 万 MPV、品控员、绩效考核）却连公司名都对不上任何公开记录的。</p>
     </header>
     <ol>
-      <li><strong>群里对它的好感，很可能是买来的。</strong>小红书上两篇「极力推荐我和朋友报的青甘大环线团」——一篇 5 粉丝湖南 IP，一篇 1 粉丝北京 IP，发帖 09-10 与 09-11，<strong>正是德华进群的同一周</strong>。同一模板：都声明「我粉丝这么少接不了广告」、都写「除了机票和吃饭其他基本都包含」、都不写公司名不写价格、评论区清一色「求推」，博主一律回「欧克」导私信。另有一位真实客人在避雷帖评论区亲口说：「评论下面找的，说什么去过不踩雷，可以推，应该是广告吧」。</li>
-      <li><strong>「青甘旅游定制师_德华」是批量马甲号命名模板。</strong>小红书搜同格式返回一整排——菲菲、小海、卓玛、小马、琳琳、诗沁……几乎全是 <span class="mono">0</span> 笔记、<span class="mono">0–2</span> 粉丝。前缀加 A/AA 是为了在通讯录里置顶。这个身份<strong>没有口碑成本，出问题随时弃号重开</strong>。</li>
-      <li><strong>「圆梦青甘」在任何 OTA 上都不存在。</strong>没有第三方点评，没有历史成团记录可回溯——所有质量承诺都只能靠合同兜底。</li>
-      <li><strong>主打的「随车无人机」在这条线的主要景点全部禁飞。</strong>两位博主实地核对告示牌：青海湖二郎剑、鸣沙山月牙泉、莫高窟、嘉峪关关城、张掖七彩丹霞——<span class="pill">全禁</span>。可飞的只有茶卡（需签承诺书报备）和大柴旦翡翠湖。<strong>你们最想拍的地方都用不了。</strong></li>
-      <li><strong>腾势 D9 装不下你们。</strong>七座版 6 客＋1 司机正好坐满，6 个人的箱子没地方放。而且它自己说「封顶 5 人纯玩小团」——你们 6 个，这句话逻辑上就不成立。</li>
-      <li><strong>27 小时内三个价：3080 → 3000 →「预售 3980−500＝3480」。</strong>那个「原价 3980」在任何渠道都没出现过。他自己报过 3080，就说明 3080 做得下来。</li>
+      <li><strong>群里对它的好感，很可能是买来的。</strong>小红书两篇「极力推荐我和朋友报的青甘大环线团」——5 粉丝湖南 IP 与 1 粉丝北京 IP，发帖 09-10、09-11，<strong>正是德华进群的同一周</strong>。同一模板：都声明「粉丝这么少接不了广告」、都不写公司名不写价格、评论区清一色「求推」，博主一律回「欧克」导私信。另有真实客人在避雷帖评论区说：「评论下面找的，说去过不踩雷可以推，应该是广告吧」。</li>
+      <li><strong>「青甘旅游定制师_德华」是批量马甲号命名模板。</strong>小红书搜同格式返回一整排——菲菲、小海、卓玛、小马、琳琳、诗沁……几乎全是 <span class="mono">0</span> 笔记、<span class="mono">0–2</span> 粉丝。这个身份<strong>没有口碑成本，出问题随时弃号重开</strong>。</li>
+      <li><strong>「圆梦青甘」在任何 OTA 上都不存在。</strong>没有第三方点评，没有历史成团记录——所有质量承诺只能靠合同兜底。</li>
+      <li><strong>主打的「随车无人机」在主要景点全部禁飞。</strong>两位博主实地核对告示牌：青海湖二郎剑、鸣沙山月牙泉、莫高窟、嘉峪关关城、张掖七彩丹霞 <span class="pill">全禁</span>。可飞的只有茶卡（需报备）和大柴旦翡翠湖。</li>
+      <li><strong>腾势 D9 装不下你们。</strong>七座版 6 客＋1 司机正好坐满，行李没地方放。而它自己说「封顶 5 人纯玩小团」——你们 6 个，这句话逻辑上就不成立。</li>
+      <li><strong>27 小时内三个价：3080 → 3000 → 「预售 3980−500＝3480」。</strong>那个「原价 3980」在任何渠道都没出现过。他自己报过 3080，就说明 3080 做得下来。</li>
     </ol>
   </div>
 </section>
 
-<section>
+<section id="r5">
   <h2 class="sec">比选团更急的三件事</h2>
   <p class="sec-note">选团可以多聊两天，下面三件过期就没了。</p>
   <div class="clock">
     <div class="tick">
       <span class="when">窗口已过 · 只剩回流</span>
       <span class="what">莫高窟票</span>
-      <span class="why">可预约 30 天以内的票，每天 <span class="mono">7:00</span> 新放的只是第 30 天——今天放的是 <span class="mono">10-13</span>，<strong>为抢国庆定 6:55 闹钟没有意义</strong>。现在只能在 <span class="mono">07:00–22:00</span> 多刷目标日等退票回流，或把 <span class="mono">100</span> 元应急票当保底。<strong>六家团没有一家包莫高窟。</strong></span>
+      <span class="why">可预约 30 天内的票，每天 <span class="mono">7:00</span> 新放的只是第 30 天——今天放的是 <span class="mono">10-13</span>，<strong>为抢国庆定闹钟没有意义</strong>。只能在 <span class="mono">07:00–22:00</span> 多刷目标日等退票回流，或把 <span class="mono">100</span> 元应急票当保底。<strong>六家团没有一家包它。</strong></span>
     </div>
     <div class="tick">
       <span class="when">09-14 · 明天</span>
       <span class="what">小杰的预订截止日</span>
-      <span class="why">他写的是「预定时间：9.14 之前，预售价格 2480/人（6人）」。过了这天是涨价还是作废，他没说。今天问死，或者当它出局——别让它变成明天被迫做决定的那一个。</span>
+      <span class="why">他写「预定时间：9.14 之前，预售价格 2480/人（6人）」。过了这天是涨价还是作废没说。今天问死，或者当它出局——别让它变成明天被迫做决定的那一个。</span>
     </div>
     <div class="tick">
       <span class="when">09-16 · 后天</span>
       <span class="what">火车票开抢</span>
-      <span class="why">09-30 出发的票 09-16 放。但顺序应该是<strong>先定团再买票</strong>——团定死了行程日期和集合地，大交通才有得买；反过来先抢票，等于把自己钉在某个日期上。</span>
+      <span class="why">09-30 出发的票 09-16 放。但顺序应该是<strong>先定团再买票</strong>——团定死了日期和集合地，大交通才有得买；反过来先抢票，等于把自己钉在某个日期上。</span>
     </div>
   </div>
 
@@ -420,71 +461,81 @@ a{color:var(--accent)}a:focus-visible{outline:2px solid var(--accent);outline-of
   <p>2026 国庆假期是 <span class="mono">10/1–10/7</span>，<strong><span class="mono">10/8</span> 是工作日</strong>（国办发明电〔2025〕7 号）。所以 10/08 返程<strong>全程高速收费</strong>、10/07 当晚西宁房价已回落、10/08 的机票火车票比 10/07 便宜。而你们的窗口是 <strong>8 天 7 晚</strong>，团却是 6 天 5 晚 / 5 天 4 晚——<strong>多出来的 10/07 那晚住宿和 10/08 一整天，六家报价里一分钱都没有。</strong>建议团期排 <span class="mono">10/02–10/07</span>，10/01 只做西宁集结。</p>
 </section>
 
-<section>
+<section id="r6">
   <h2 class="sec">付钱前按顺序做完这几步</h2>
-  <p class="sec-note">这是一条执行顺序——第 1 步没过，后面都不用做。</p>
+  <p class="sec-note">这是执行顺序——第 1 步没过，后面都不用做。</p>
   <div class="steps">
-    <div class="step">
-      <b>要两证，然后自己去查</b>
-      <span>营业执照 ＋ 旅行社业务经营许可证清晰照（两证同名同主体）。微信搜小程序「全国旅游监管服务」→ 旅行社查询 → 输入公司全称或许可证号。看三点：经营状态须<strong>正常存续</strong>、经营范围须含<strong>境内旅游业务</strong>、名称与营业执照<strong>一字不差</strong>。查不到就到此为止。</span>
-    </div>
-    <div class="step">
-      <b>让六家按同一张清单重报</b>
-      <span>要求每家书面回答同样几项：<strong>几天几晚、含几晚住宿、逐晚酒店全名、含哪些景区的首道门票、哪些景区小交通是「不坐进不去」的必消项及各多少钱、由谁承担</strong>。拿到之后才谈贵贱——含票与不含票的两家直接比数字，排序会整个翻转。</span>
-    </div>
-    <div class="step">
-      <b>先签合同，再谈定金</b>
-      <span>用 2026 版《团队境内旅游合同》示范文本 <span class="mono">GF-2026-2401</span>（2026-03-31 全国推行）。第十二条：<strong>行程开始前 7 日以上退团，退还全部费用、扣 0%</strong>——今天到 9/24 都在这个窗口里。对方拿出自制合同、或删改了违约责任章节，就是明确的减分信号。</span>
-    </div>
-    <div class="step">
-      <b>把「准 4 星」这类词逐条换成名字</b>
-      <span>示范文本<strong>附件 2 明文禁止</strong>「准 4 星」「豪华」这类行程单用语——六家报价全部命中这条禁令。把这段截图发过去，要求按<strong>酒店全名 ＋ 星级逐晚</strong>写进行程单。谁能照办，谁就真的锁了房；谁开始打太极，说明房根本没定。</span>
-    </div>
-    <div class="step">
-      <b>车要看资质，不是看座位数</b>
-      <span>要三样：<strong>行驶证上使用性质为「营运」、车辆道路运输证、驾驶员道路旅客运输从业资格证</strong>。非营运车拉客出事，商业险可能拒赔，这是六个人里唯一无法用钱弥补的风险。座位数只影响一件事：国庆高速免费只给<strong>7 座及以下</strong>（10/1 00:00–10/7 24:00），9 座不免；10/08 驶出收费站时已在假期外，<strong>全程收费</strong>。另把车牌号和「独立成团、不并团，如并团每人退 XXX 元」一起写进合同。</span>
-    </div>
-    <div class="step">
-      <b>钱只进对公账户</b>
-      <span>户名必须与合同甲方、许可证名称<strong>三者一字不差</strong>。要发票，不要只要收据——收据只能证明钱付了，证明不了这是一笔经营性旅游服务收入。另外把「定金」二字改成「订金」，或在合同里写明无条件退还的条件与日期。</span>
-    </div>
-    <div class="step">
-      <b>用这道题验他们是不是真在跑这条线</b>
-      <span><strong>「10 月最后一天，扁都口能不能走？」</strong>——G227 扁都口至峨堡段在你们出行期内是<strong>封闭</strong>的（连携程系商品页都写着「因 227 国道封路」），而寻风、阿凯、港港三家的最后一天行程都还写着「张掖—扁都口—祁连」。这是同一份过期模板。答得出绕行方案（经武威，或二尕公路经祁连）的是真在跑线的；答「照常走」的说明行程稿和调度是脱节的。顺便要求书面给出改后的当日里程、时长、以及抵达西宁的最晚时间。</span>
-    </div>
+    <div class="step"><b>要两证，然后自己去查</b>
+      <span>营业执照 ＋ 旅行社业务经营许可证清晰照（两证同名同主体）。微信搜小程序「全国旅游监管服务」→ 旅行社查询 → 输入公司全称或许可证号。看三点：经营状态须<strong>正常存续</strong>、经营范围须含<strong>境内旅游业务</strong>、名称与营业执照<strong>一字不差</strong>。查不到就到此为止。</span></div>
+    <div class="step"><b>让六家按同一张清单重报</b>
+      <span>要求每家书面回答同样几项：<strong>几天几晚、含几晚住宿、逐晚酒店全名、含哪些景区的首道门票、哪些景区小交通是「不坐进不去」的必消项及各多少钱、由谁承担</strong>。拿到之后才谈贵贱——含票与不含票的两家直接比数字，排序会整个翻转。</span></div>
+    <div class="step"><b>先签合同，再谈定金</b>
+      <span>用 2026 版《团队境内旅游合同》示范文本 <span class="mono">GF-2026-2401</span>。第十二条：<strong>行程开始前 7 日以上退团，退还全部费用、扣 0%</strong>——今天到 9/24 都在这个窗口里。对方拿出自制合同、或删改违约责任章节，就是明确的减分信号。</span></div>
+    <div class="step"><b>把「准 4 星」逐条换成酒店名</b>
+      <span>示范文本<strong>附件 2 明文禁止</strong>「准 4 星」「豪华」这类行程单用语——六家全部命中。把这段截图发过去，要求按<strong>酒店全名 ＋ 星级逐晚</strong>写进行程单。谁能照办，谁就真锁了房；谁打太极，说明房根本没定。</span></div>
+    <div class="step"><b>车要看资质，不是看座位数</b>
+      <span>要三样：<strong>行驶证使用性质为「营运」、车辆道路运输证、驾驶员道路旅客运输从业资格证</strong>。非营运车拉客出事，商业险可能拒赔——这是六个人里唯一无法用钱弥补的风险。座位数只影响一件事：国庆高速免费只给<strong>7 座及以下</strong>（10/1 00:00–10/7 24:00），9 座不免；10/08 已在假期外，<strong>全程收费</strong>。车牌号和「独立成团、不并团，如并团每人退 XXX 元」一起写进合同。</span></div>
+    <div class="step"><b>钱只进对公账户</b>
+      <span>户名必须与合同甲方、许可证名称<strong>三者一字不差</strong>。要发票，不要只要收据——收据只能证明钱付了，证明不了这是经营性旅游服务收入。另把「定金」改成「订金」，或在合同里写明无条件退还的条件与日期。</span></div>
+    <div class="step"><b>用这道题验他们是不是真在跑这条线</b>
+      <span><strong>「10 月最后一天，扁都口能不能走？」</strong>——G227 扁都口至峨堡段在你们出行期内是<strong>封闭</strong>的（连携程系商品页都写着「因 227 国道封路」），而寻风、阿凯、港港三家的最后一天行程都还写着「张掖—扁都口—祁连」，是同一份过期模板。答得出绕行方案（经武威，或二尕公路经祁连）的是真在跑线的。顺便要求书面给出改后的当日里程、时长、抵达西宁的最晚时间。</span></div>
   </div>
 </section>
 
-<section>
+<section id="r7">
   <h2 class="sec">莫高窟：怎么弄到票</h2>
-  <p class="sec-note">六家团没有一家包它，所以无论选谁这件事都要自己做。</p>
+  <p class="sec-note">六家团没有一家包它，无论选谁这件事都要自己做。</p>
   <div class="panel">
-    <p><strong>票价（旺季 4/1–11/30，覆盖你们全程）：</strong>正常参观 全价 <span class="mono">238</span>／优惠 <span class="mono">148</span>／特种优惠 <span class="mono">20</span>，内容是数字电影 ＋ <strong>8 个实体洞窟</strong>，单日限 <span class="mono">6000</span> 张。应急参观 全价 <span class="mono">100</span>／优惠 <span class="mono">55</span>／特种优惠 <span class="mono">20</span>，内容是 <strong>4 个实体洞窟</strong>、无数字电影，单日限 <span class="mono">12000</span> 张。</p>
-    <p><strong>优惠票你们大概率符合：</strong>国内全日制统招<strong>在读硕士研究生及以下</strong>（博士不享受；成教、自考、进修、网络教育不享受），须带学生证等证件原件。</p>
-    <p><strong>放票机制：</strong>可预约购买 <strong>30 天以内</strong>的票，网络预约系统每日 <span class="mono">07:00–22:00</span> 开放。所以每天 7:00 新放出来的只是<strong>第 30 天那一天</strong>。10/02–10/07 早就滚过去了，定闹钟没用。</p>
-    <div class="quote"><strong>别用「买远期票占位再改签」这一招。</strong>官方关于改签只有一句话：网络预售门票<strong>仅支持一次免费改签，且前提为改签日期有同类型余票</strong>。没有任何官方文本提到改签有独立库存或优先权——占位票没有已知优势，反而会用掉那唯一一次免费改签。</div>
-    <p><strong>真实可做的只有两件：</strong>在 <span class="mono">07:00–22:00</span> 系统开放时段多刷几次目标日等退票回流；把 <span class="mono">100</span> 元应急票当保底入场券。<strong>不要信任何「应急票提前几天几点放」的时间表</strong>——这件事查不到任何官方依据。</p>
-    <p style="margin-bottom:0"><strong>一个容易搞反的细节：</strong>换纸质购票信息单<strong>不是学生票独有的步骤</strong>。2026 年公告写的是常规参观以及所有享受优惠的游客都要换纸质单，<strong>只有全价应急票能刷身份证直接进</strong>。</p>
+    <p><strong>票价（旺季 4/1–11/30，覆盖全程）：</strong>正常参观 全价 <span class="mono">238</span>／优惠 <span class="mono">148</span>，含数字电影 ＋ <strong>8 个实体洞窟</strong>，单日限 <span class="mono">6000</span> 张。应急参观 全价 <span class="mono">100</span>／优惠 <span class="mono">55</span>，只有 <strong>4 个洞窟</strong>、无数字电影，单日限 <span class="mono">12000</span> 张。</p>
+    <p><strong>优惠票你们大概率符合：</strong>国内全日制统招<strong>在读硕士研究生及以下</strong>（博士不享受；成教、自考、进修、网络教育不享受），须带证件原件。</p>
+    <p><strong>放票机制：</strong>可预约 <strong>30 天以内</strong>的票，系统每日 <span class="mono">07:00–22:00</span> 开放。每天 7:00 新放的只是<strong>第 30 天那一天</strong>，10/02–10/07 早滚过去了，定闹钟没用。</p>
+    <div class="quote"><strong>别用「买远期票占位再改签」这一招。</strong>官方关于改签只有一句：网络预售门票<strong>仅支持一次免费改签，且前提为改签日期有同类型余票</strong>。没有任何官方文本提到改签有独立库存——占位票没有已知优势，反而会用掉那唯一一次免费改签。</div>
+    <p><strong>真实可做的只有两件：</strong>在 <span class="mono">07:00–22:00</span> 多刷目标日等退票回流；把 <span class="mono">100</span> 元应急票当保底入场券。<strong>不要信任何「应急票提前几天几点放」的时间表</strong>，这件事查不到官方依据。</p>
+    <p style="margin-bottom:0"><strong>一个容易搞反的细节：</strong>换纸质购票信息单<strong>不是学生票独有的步骤</strong>——常规参观及所有优惠票都要换，<strong>只有全价应急票能刷身份证直接进</strong>。</p>
   </div>
 </section>
 
-<section>
+<section id="r8">
   <h2 class="sec">这份东西该怎么读</h2>
   <div class="sources">
-    <h3>证据边界 · 请一起看</h3>
     <ul>
-      <li><strong>小红书的口碑不能用来排序。</strong>这条线上正面帖和负面帖<strong>都在批量投流</strong>——已找到两组不同作者、不同价格、相隔 25 天但正文逐句相同的「避雷帖」。所以评分榜里没有「口碑」这一项。同理，以后就算搜到「喜致旅游好评」，也不能作为翻案理由。</li>
-      <li><strong>「查不到」有两种，不要混。</strong>「喜致」「自游行」在<strong>青海省文旅厅 733 家名录</strong>里 0 命中是确定的（逐条解析原文得出）；但全国平台和工商登记<strong>没能实测</strong>——查询用的网络出口在境外，相关站点全部拒绝访问。<strong>你们在国内用微信小程序补查一次，2 分钟就能把这条变成完全确定。</strong></li>
-      <li><strong>寻风那条最实的凭据：</strong><span class="mono">L-QH-100489</span> 来自青海省文旅厅《青海省旅行社名录》（2026-03-27，733 家 / 730 个许可证号）逐条解析，序号 144，不是商家自制图片。<strong>但未验证的是：微信上那个「寻风小唐」到底是不是这家公司的人。</strong>打 <span class="mono">0971-3598024</span> 问一句就能解决——注意「寻风小唐」和「西北旅游领队-小唐」是两个人。</li>
-      <li><strong>为什么没推荐走携程/飞猪：</strong>查过了，那不是捷径。「携程自营」是<strong>品牌标签不是经营主体</strong>——它的列表页自己逐条公示「委托社：牧云甘青 / 青海锐久国旅 / 369旅行」，执行方还是这批本地地接社；而且平台上<strong>买不到整车包车</strong>，公开商品全是拼团（行程页原文「乘车座位按 Z 字形轮换，每日调换」）。「先行赔付」在规章里是<strong>「鼓励」不是强制</strong>，赔付上限基本封顶订单金额，部分情形给的是礼品卡。<strong>但它的商品页值得当尺子用</strong>：几天几晚、含几晚住、含不含首道门票、能不能退、退多少，全写死了——拿那张清单去要求六家重报。</li>
-      <li><strong>住宿这条帮你们排除一个顾虑：</strong>「德令哈、大柴旦国庆没房」<strong>不成立</strong>。实测大柴旦 10/04 仍有三钻在售（¥573 / ¥581 / ¥648），德令哈 10/03 有 9 家挂 ¥381–733。但这三个小城确实是全线涨得最凶的三晚——大柴旦对同星期平季约 <span class="mono">3.0–3.2×</span>，茶卡约 <span class="mono">2.3–4.3×</span>。以上均为「当日最低房型起价」，6 人订 3 间只会更高。</li>
-      <li><strong>官方最近一次公开提醒，说的就是你们现在这个场景。</strong>2026-08-05 兰州市文旅局撤销 9 家旅行社许可，原文：「报名参团务必查验旅行社《营业执照》与《旅行社业务经营许可证》原件，核对许可号与经营范围，<strong>切勿通过个人微信、短视频私信向无资质主体转账参团</strong>。」该局今年以来已撤销 48 家。</li>
+      <li><strong>小红书的口碑不能用来排序。</strong>这条线上正面帖和负面帖<strong>都在批量投流</strong>——已找到两组不同作者、不同价格、相隔 25 天但正文逐句相同的「避雷帖」。所以评分榜里没有「口碑」这一项。以后就算搜到「喜致旅游好评」，也不能作为翻案理由。</li>
+      <li><strong>「查不到」有两种，别混。</strong>「喜致」「自游行」在<strong>青海省文旅厅 733 家名录</strong>里 0 命中是确定的（逐条解析原文得出）；但全国平台和工商登记<strong>没能实测</strong>——查询用的网络出口在境外，相关站点全部拒绝访问。<strong>在国内用微信小程序补查一次，2 分钟就能把这条变成完全确定。</strong></li>
+      <li><strong>寻风那条最实的凭据：</strong><span class="mono">L-QH-100489</span> 来自青海省文旅厅《青海省旅行社名录》（2026-03-27，733 家 / 730 个许可证号）逐条解析，序号 144，不是商家自制图片。<strong>未验证的是：微信上那个「寻风小唐」是不是这家公司的人。</strong>打 <span class="mono">0971-3598024</span> 问一句就能解决。注意「寻风小唐」和「西北旅游领队-小唐」是两个人。</li>
+      <li><strong>为什么没推荐走携程/飞猪：</strong>查过了，不是捷径。「携程自营」是<strong>品牌标签不是经营主体</strong>——列表页自己逐条公示「委托社：牧云甘青 / 青海锐久国旅 / 369旅行」，执行方还是这批本地地接社；平台上也<strong>买不到整车包车</strong>，公开商品全是拼团（行程页原文「乘车座位按 Z 字形轮换，每日调换」）。「先行赔付」在规章里是<strong>「鼓励」不是强制</strong>。<strong>但它的商品页值得当尺子</strong>：几天几晚、含几晚住、含不含首道门票、能不能退、退多少全写死了——拿那张清单去要求六家重报。</li>
+      <li><strong>住宿这条可以放心：</strong>「德令哈、大柴旦国庆没房」<strong>不成立</strong>。实测大柴旦 10/04 仍有三钻在售（¥573 / ¥581 / ¥648），德令哈 10/03 有 9 家挂 ¥381–733。但这三个小城是全线涨得最凶的三晚——大柴旦对同星期平季约 <span class="mono">3.0–3.2×</span>，茶卡约 <span class="mono">2.3–4.3×</span>。以上均为「当日最低房型起价」，6 人订 3 间只会更高。</li>
+      <li><strong>官方最近一次提醒说的就是这个场景。</strong>2026-08-05 兰州市文旅局撤销 9 家旅行社许可，原文：「报名参团务必查验旅行社《营业执照》与《旅行社业务经营许可证》原件，核对许可号与经营范围，<strong>切勿通过个人微信、短视频私信向无资质主体转账参团</strong>。」该局今年以来已撤销 48 家。</li>
     </ul>
   </div>
 </section>
 
 <footer>
-  核查方法：群内六家转发记录逐条读取（含全部笔记卡与两份 PDF）；三轮独立调查共 36 个单元，每个结论配一名独立复核者尝试反驳，复核推翻的一律以复核为准。主体资质以政府公开名录原文为准；口碑类材料不进评分。数据截至 2026-09-13。
+  核查方法：群内六家转发记录逐条读取（含全部笔记卡与两份 PDF）；三轮独立调查共 36 个单元，每条结论配一名独立复核者尝试反驳，复核推翻的一律以复核为准。主体资质以政府公开名录原文为准；口碑类材料不进评分。数据截至 2026-09-13。
 </footer>
 
+</main>
 </div>
+
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail nav a'));
+  var map = {};
+  links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+  var secs = Array.prototype.slice.call(document.querySelectorAll('main section[id]'));
+  if(!secs.length || !('IntersectionObserver' in window)) return;
+  var seen = {};
+  function paint(){
+    var best = null;
+    secs.forEach(function(s){ if(seen[s.id]) best = best || s; });
+    if(!best) return;
+    links.forEach(function(a){ a.classList.remove('on'); });
+    if(map[best.id]) map[best.id].classList.add('on');
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ seen[e.target.id] = e.isIntersecting; });
+    paint();
+  }, { rootMargin: '-8% 0px -70% 0px', threshold: 0 });
+  secs.forEach(function(s){ io.observe(s); });
+  if(map['r1']) map['r1'].classList.add('on');
+})();
+</script>
