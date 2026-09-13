@@ -5,14 +5,13 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Noto+Serif+SC:wght@600;700&display=swap">
 
 <style>
-/* 取色自这条线本身：青海湖的蓝、祁连的草、戈壁的赭、丹霞的赤，落在一层晒过的沙上 */
 :root{
   --ground:#FAF5EC; --surface:#FFFCF7; --surface-2:#F3EADC; --sunken:#EDE3D3;
   --ink:#2A211C; --ink-2:#5C4C42; --ink-3:#8B7868;
   --line:#DFD1BD; --line-soft:#EDE3D4;
   --accent:#1C5A7A; --accent-soft:#DEEAF0;
   --danger:#B4491F; --danger-soft:#F8E4D9;
-  --warn:#B07C22; --good:#4A7C4E;
+  --warn:#B07C22; --warn-soft:#F7ECD6; --good:#4A7C4E; --good-soft:#E1EDE1;
   --d1:#1C5A7A; --d2:#2E7D8C; --d3:#4A7C4E; --d4:#B07C22; --d5:#B4491F;
   --sky:rgba(28,90,122,.07); --sand:rgba(176,124,34,.05);
   --shadow:0 1px 2px rgba(80,54,34,.05), 0 14px 34px -26px rgba(80,54,34,.55);
@@ -25,7 +24,7 @@
     --line:#3E3229; --line-soft:#2C241E;
     --accent:#78BEDC; --accent-soft:#16323E;
     --danger:#E8865C; --danger-soft:#38201A;
-    --warn:#DCAC55; --good:#86BE8B;
+    --warn:#DCAC55; --warn-soft:#332713; --good:#86BE8B; --good-soft:#1B2E1E;
     --d1:#78BEDC; --d2:#6FB8C4; --d3:#86BE8B; --d4:#DCAC55; --d5:#E8865C;
     --sky:rgba(120,190,220,.07); --sand:rgba(220,172,85,.04);
     --shadow:0 1px 2px rgba(0,0,0,.5), 0 14px 34px -26px rgba(0,0,0,1);
@@ -38,7 +37,7 @@
   --line:#3E3229; --line-soft:#2C241E;
   --accent:#78BEDC; --accent-soft:#16323E;
   --danger:#E8865C; --danger-soft:#38201A;
-  --warn:#DCAC55; --good:#86BE8B;
+  --warn:#DCAC55; --warn-soft:#332713; --good:#86BE8B; --good-soft:#1B2E1E;
   --d1:#78BEDC; --d2:#6FB8C4; --d3:#86BE8B; --d4:#DCAC55; --d5:#E8865C;
   --sky:rgba(120,190,220,.07); --sand:rgba(220,172,85,.04);
   --shadow:0 1px 2px rgba(0,0,0,.5), 0 14px 34px -26px rgba(0,0,0,1);
@@ -60,7 +59,6 @@ body{
 }
 .mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
 
-/* ══ 骨架：左标题栏 + 正文 ══ */
 .shell{max-width:1120px;margin:0 auto;padding:40px 26px 100px;
   display:grid;grid-template-columns:196px minmax(0,1fr);gap:52px;align-items:start}
 .rail{position:sticky;top:34px}
@@ -79,11 +77,9 @@ body{
   color:var(--ink-3);text-decoration:none;font-size:13px;line-height:1.45;transition:color .18s,border-color .18s}
 .rail nav a:hover{color:var(--ink)}
 .rail nav a.on{color:var(--ink);font-weight:600;border-left-color:var(--accent)}
-.rail nav a span{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--ink-3);
-  margin-right:7px;font-weight:400}
+.rail nav a span{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--ink-3);margin-right:7px;font-weight:400}
 .rail nav a.on span{color:var(--accent)}
 
-/* ══ 抬头 ══ */
 .masthead{border-bottom:2px solid var(--ink);padding-bottom:20px;margin-bottom:28px}
 .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--ink-3);display:flex;flex-wrap:wrap;gap:5px 18px;margin-bottom:13px}
@@ -92,10 +88,14 @@ h1{font-family:"Noto Serif SC","Songti SC",serif;font-weight:700;font-size:clamp
 .dek{color:var(--ink-2);font-size:15.5px;max-width:56ch;margin:0}
 
 .verdict{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);
-  padding:22px 26px;margin:0 0 48px;box-shadow:var(--shadow)}
+  padding:22px 26px;margin:0 0 18px;box-shadow:var(--shadow)}
 .verdict h2{margin:0 0 12px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
   font-family:"IBM Plex Mono",monospace;color:var(--accent);font-weight:600}
 .verdict p{margin:0 0 11px}.verdict p:last-child{margin-bottom:0}
+
+.flash{background:var(--good-soft);border:1px solid var(--good);padding:16px 20px;margin:0 0 48px;border-radius:2px}
+.flash h3{margin:0 0 7px;font-size:14.5px;color:var(--good);font-weight:700}
+.flash p{margin:0;font-size:13.5px;line-height:1.7}
 
 section{margin:0 0 52px;scroll-margin-top:26px}
 h2.sec{font-family:"Noto Serif SC","Songti SC",serif;font-weight:600;font-size:24px;
@@ -103,16 +103,16 @@ h2.sec{font-family:"Noto Serif SC","Songti SC",serif;font-weight:600;font-size:2
 .sec-note{color:var(--ink-3);font-size:13.5px;margin:0 0 20px;max-width:64ch}
 h3{font-size:16px;margin:30px 0 9px;font-weight:700}
 
-/* ══ 评分榜 ══ */
 .board{border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow);border-radius:2px;overflow:hidden}
 .boardhead{padding:12px 20px;background:var(--surface-2);border-bottom:1px solid var(--line);
   font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--ink-3);display:grid;grid-template-columns:172px 1fr 66px;gap:16px}
+  color:var(--ink-3);display:grid;grid-template-columns:186px 1fr 66px;gap:16px}
 .boardhead span:last-child{text-align:right}
-.row{display:grid;grid-template-columns:172px 1fr 66px;gap:16px;align-items:center;
+.row{display:grid;grid-template-columns:186px 1fr 66px;gap:16px;align-items:center;
   padding:15px 20px;border-bottom:1px solid var(--line-soft)}
 .row:last-of-type{border-bottom:0}
 .row.win{background:var(--accent-soft)}
+.row.alt{background:var(--good-soft)}
 .rname b{display:block;font-size:14.5px;font-weight:700;line-height:1.4}
 .rname small{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5;margin-top:1px}
 .bar{display:flex;height:22px;background:var(--sunken);border-radius:2px;overflow:hidden}
@@ -138,9 +138,7 @@ h3{font-size:16px;margin:30px 0 9px;font-weight:700}
 .rub h4 span{font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:500;color:var(--ink-3);margin-left:8px}
 .rub p{margin:0;font-size:12.5px;color:var(--ink-2);line-height:1.65}
 
-/* ══ 表 ══ */
-.tablewrap{overflow-x:auto;border:1px solid var(--line);background:var(--surface);
-  box-shadow:var(--shadow);border-radius:2px}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow);border-radius:2px}
 table{border-collapse:collapse;width:100%;min-width:790px;font-size:13.5px}
 thead th{text-align:left;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;
   text-transform:uppercase;color:var(--ink-3);font-weight:500;padding:12px 14px;
@@ -162,13 +160,22 @@ td.num em{display:block;font-style:normal;color:var(--ink-3);font-size:11.5px;ma
 .pill{display:inline-block;font-size:11px;font-weight:600;padding:2px 7px;white-space:nowrap;
   background:var(--danger-soft);color:var(--danger)}
 
-/* ══ 其它 ══ */
 .dossier{border:1px solid var(--danger);background:var(--danger-soft);border-radius:2px;overflow:hidden}
 .dossier header{padding:17px 22px 13px;border-bottom:1px solid rgba(180,73,31,.24)}
 .dossier header h3{margin:0 0 3px;font-size:17.5px;color:var(--danger);font-weight:700}
 .dossier header p{margin:0;font-size:13px;color:var(--ink-2)}
 .dossier ol{margin:0;padding:15px 22px 19px 38px;display:grid;gap:10px}
 .dossier li{font-size:13.5px;line-height:1.7}
+
+.twocol{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(272px,1fr))}
+.card{border:1px solid var(--line);background:var(--surface);padding:17px 19px;border-radius:2px;box-shadow:var(--shadow)}
+.card.good{border-color:var(--good)}
+.card.warn{border-color:var(--warn);background:var(--warn-soft)}
+.card h4{margin:0 0 9px;font-size:14px;font-weight:700}
+.card.good h4{color:var(--good)}.card.warn h4{color:var(--warn)}
+.card ul{margin:0;padding-left:17px;display:grid;gap:7px}
+.card li{font-size:13px;line-height:1.62;color:var(--ink-2)}
+.card li strong{color:var(--ink)}
 
 .clock{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(228px,1fr))}
 .tick{background:var(--surface);border:1px solid var(--line-soft);border-top:3px solid var(--danger);
@@ -178,24 +185,21 @@ td.num em{display:block;font-style:normal;color:var(--ink-3);font-size:11.5px;ma
 .tick .what{font-weight:700;display:block;margin-bottom:5px;font-size:15px}
 .tick .why{color:var(--ink-2);font-size:13px;line-height:1.65}
 
-.steps{counter-reset:s;display:grid;gap:1px;border:1px solid var(--line);
-  background:var(--line-soft);border-radius:2px;overflow:hidden}
+.steps{counter-reset:s;display:grid;gap:1px;border:1px solid var(--line);background:var(--line-soft);border-radius:2px;overflow:hidden}
 .step{background:var(--surface);padding:15px 18px 15px 54px;position:relative;counter-increment:s}
 .step::before{content:counter(s,decimal-leading-zero);position:absolute;left:18px;top:15px;
   font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:600;color:var(--accent)}
 .step b{display:block;margin-bottom:3px;font-size:14.5px}
 .step span{color:var(--ink-2);font-size:13px;line-height:1.68;display:block}
 
-.panel{border:1px solid var(--line);background:var(--surface);padding:20px 22px;
-  box-shadow:var(--shadow);border-radius:2px}
+.panel{border:1px solid var(--line);background:var(--surface);padding:20px 22px;box-shadow:var(--shadow);border-radius:2px}
 .panel > p{margin:0 0 11px;font-size:14px}.panel > p:last-child{margin-bottom:0}
 .quote{border-left:2px solid var(--danger);padding:3px 0 3px 16px;margin:14px 0;
   color:var(--ink-2);font-size:13px;line-height:1.7}
 .sources{background:var(--surface-2);border:1px solid var(--line-soft);padding:18px 20px;border-radius:2px}
 .sources ul{margin:0;padding-left:17px;display:grid;gap:9px}
 .sources li{font-size:13px;color:var(--ink-2);line-height:1.65}
-footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);
-  color:var(--ink-3);font-size:12.5px;line-height:1.7}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--ink-3);font-size:12.5px;line-height:1.7}
 a{color:var(--accent)}
 a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:1px}
 
@@ -204,8 +208,7 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
   .rail{position:static;margin-bottom:26px}
   .railmark{height:5px;margin-bottom:14px}
   .railtitle,.railsub{display:none}
-  .rail nav ol{display:flex;gap:0;overflow-x:auto;border-left:0;border-bottom:1px solid var(--line);
-    padding-bottom:0;-webkit-overflow-scrolling:touch}
+  .rail nav ol{display:flex;overflow-x:auto;border-left:0;border-bottom:1px solid var(--line);-webkit-overflow-scrolling:touch}
   .rail nav a{white-space:nowrap;padding:8px 14px 9px;border-left:0;border-bottom:2px solid transparent;margin:0}
   .rail nav a.on{border-left-color:transparent;border-bottom-color:var(--accent)}
   .rail nav a span{display:none}
@@ -224,17 +227,18 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
 <aside class="rail">
   <div class="railmark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
   <p class="railtitle">国庆青甘选团核查</p>
-  <p class="railsub">6 人 · 六家<br>核查至 09-13</p>
+  <p class="railsub">6 人 · 五家<br>核查至 09-13</p>
   <nav aria-label="目录">
     <ol>
       <li><a href="#r1"><span>01</span>结论</a></li>
       <li><a href="#r2"><span>02</span>评分榜</a></li>
-      <li><a href="#r3"><span>03</span>六家明细</a></li>
-      <li><a href="#r4"><span>04</span>德华为何 13 分</a></li>
-      <li><a href="#r5"><span>05</span>三件急事</a></li>
-      <li><a href="#r6"><span>06</span>付款前七步</a></li>
-      <li><a href="#r7"><span>07</span>莫高窟</a></li>
-      <li><a href="#r8"><span>08</span>证据边界</a></li>
+      <li><a href="#r3"><span>03</span>两家持牌社</a></li>
+      <li><a href="#r4"><span>04</span>五家明细</a></li>
+      <li><a href="#r5"><span>05</span>德华为何 13 分</a></li>
+      <li><a href="#r6"><span>06</span>三件急事</a></li>
+      <li><a href="#r7"><span>07</span>付款前七步</a></li>
+      <li><a href="#r8"><span>08</span>莫高窟</a></li>
+      <li><a href="#r9"><span>09</span>证据边界</a></li>
     </ol>
   </nav>
 </aside>
@@ -247,50 +251,47 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
     <span>10/01 抵西宁 · 10/08 返程</span>
   </div>
   <h1>六家青甘团，钱该给谁</h1>
-  <p class="dek">群里转进来的六家报价全部读完，外加三轮独立核查——36 个调查单元，每条结论配一名独立复核者尝试反驳。</p>
+  <p class="dek">群里转进来的报价全部读完，外加四轮独立核查——44 个调查单元，每条结论配一名独立复核者尝试反驳。</p>
 </header>
 
 <section id="r1">
   <div class="verdict">
     <h2>结论</h2>
-    <p><strong>选寻风，别选德华。</strong>寻风是六家里唯一能在青海省文旅厅 733 家旅行社名录里查到经营主体的（<span class="mono">L-QH-100489</span>，在业）；德华的「喜致旅游」在该名录与另外五条独立渠道上<strong>全部零结果</strong>，而它定金最高、报价最高。</p>
-    <p><strong>定下之后先办两件事：</strong>打 <span class="mono">0971-3598024</span> 向寻风公司座机核实「寻风小唐」确是他家的人；要求把 5 天 4 晚换成它自家的 <strong>6 天 5 晚</strong> 重新报价。</p>
+    <p><strong>只在两家里选：寻风 或 丝路环域。</strong>这两家是唯一能在政府名录里查到旅行社业务经营许可证的——<span class="mono">L-QH-100489</span>（青海寻风）与 <span class="mono">L-GS-100815</span>（甘肃丝路环域）。其余三家连公司名都没给过，或给了但查不到。</p>
+    <p><strong>德华出局。</strong>「喜致旅游」在六条独立渠道上全部零结果，而它报价最高（3480）、定金最高（300/人）。</p>
+    <p><strong>两家怎么挑：</strong>要行程和酒店写得最死、付款最安全 → <strong>寻风</strong>（但必须把 5 天 4 晚换成它自家的 6 天 5 晚）。要价格最低、6 天 5 晚、已经拿到合同文本 → <strong>丝路环域</strong>（按港港的 2380、按小杰的付款结构）。</p>
+  </div>
+  <div class="flash">
+    <h3>一个改变格局的发现：港港和小杰是同一家公司</h3>
+    <p>两人发的是<strong>同一张笔记卡</strong>——同名「甘肃丝路环域旅游」、同地址「嘉峪关市雄关西路酒钢宾馆南楼底商铺10号」、同样四张配图。所以你们以为的六个独立选项，实际只有<strong>五家</strong>。他们报的 2380 与 2480 不是两家竞价，是同一家公司的两个销售各自的报价空间——<strong>议价基准应该直接压到 2380，并要求公司出一份盖章的统一报价单。</strong></p>
   </div>
 </section>
 
 <section id="r2">
   <h2 class="sec">评分榜</h2>
-  <p class="sec-note">五个维度、满分 50。条形长度就是得分，颜色分段显示分从哪来——寻风赢在主体与交付，小杰那 20 分几乎全由付款结构贡献。</p>
+  <p class="sec-note">五个维度、满分 50。条形长度就是得分，颜色分段显示分从哪来——两家持牌社断层领先，其余三家的主体那一段是空的。</p>
 
   <div class="board">
-    <div class="boardhead"><span>销售</span><span>得分构成</span><span>总分</span></div>
+    <div class="boardhead"><span>签约主体</span><span>得分构成</span><span>总分</span></div>
 
     <div class="row win">
-      <div class="rname"><b>寻风小唐</b><small>青海寻风国际旅行社</small></div>
-      <div class="bar" role="img" aria-label="寻风 47 分：主体 15、合同 8、付款 10、交付 10、口径 4">
-        <i class="s1" style="width:30%" title="主体可核验 15/15"></i><i class="s2" style="width:16%" title="合同 8/10"></i><i class="s3" style="width:20%" title="付款结构 10/10"></i><i class="s4" style="width:20%" title="交付可验收 10/10"></i><i class="s5" style="width:8%" title="口径诚实 4/5"></i>
+      <div class="rname"><b>青海寻风国际旅行社</b><small>销售：寻风小唐</small></div>
+      <div class="bar" role="img" aria-label="寻风 45 分：主体 15、合同 6、付款 10、交付 10、口径 4">
+        <i class="s1" style="width:30%" title="主体可核验 15/15"></i><i class="s2" style="width:12%" title="合同 6/10"></i><i class="s3" style="width:20%" title="付款结构 10/10"></i><i class="s4" style="width:20%" title="交付可验收 10/10"></i><i class="s5" style="width:8%" title="口径诚实 4/5"></i>
       </div>
-      <div class="tot">47<em>/ 50</em></div>
+      <div class="tot">45<em>/ 50</em></div>
+    </div>
+
+    <div class="row alt">
+      <div class="rname"><b>甘肃丝路环域旅游</b><small>销售：港港 2380 / 小杰 2480</small></div>
+      <div class="bar" role="img" aria-label="丝路环域 41 分：主体 15、合同 10、付款 8、交付 6、口径 2">
+        <i class="s1" style="width:30%" title="主体可核验 15/15"></i><i class="s2" style="width:20%" title="合同 10/10"></i><i class="s3" style="width:16%" title="付款结构 8/10"></i><i class="s4" style="width:12%" title="交付可验收 6/10"></i><i class="s5" style="width:4%" title="口径诚实 2/5"></i>
+      </div>
+      <div class="tot">41<em>/ 50</em></div>
     </div>
 
     <div class="row">
-      <div class="rname"><b>西北领队港港</b><small>@自游行旅游</small></div>
-      <div class="bar" role="img" aria-label="港港 30 分：主体 6、合同 4、付款 8、交付 8、口径 4">
-        <i class="s1" style="width:12%" title="主体可核验 6/15"></i><i class="s2" style="width:8%" title="合同 4/10"></i><i class="s3" style="width:16%" title="付款结构 8/10"></i><i class="s4" style="width:16%" title="交付可验收 8/10"></i><i class="s5" style="width:8%" title="口径诚实 4/5"></i>
-      </div>
-      <div class="tot">30<em>/ 50</em></div>
-    </div>
-
-    <div class="row">
-      <div class="rname"><b>A西北旅游定制-小杰</b><small>无公司名</small></div>
-      <div class="bar" role="img" aria-label="小杰 20 分：付款 10、交付 6、口径 4">
-        <i class="s3" style="width:20%" title="付款结构 10/10"></i><i class="s4" style="width:12%" title="交付可验收 6/10"></i><i class="s5" style="width:8%" title="口径诚实 4/5"></i>
-      </div>
-      <div class="tot">20<em>/ 50</em></div>
-    </div>
-
-    <div class="row">
-      <div class="rname"><b>青甘定制师_德华</b><small>@喜致旅游</small></div>
+      <div class="rname"><b>德华 @喜致旅游</b><small>主体六渠道零结果</small></div>
       <div class="bar" role="img" aria-label="德华 13 分：主体 3、合同 6、付款 2、交付 2、口径 0">
         <i class="s1" style="width:6%" title="主体可核验 3/15"></i><i class="s2" style="width:12%" title="合同 6/10"></i><i class="s3" style="width:4%" title="付款结构 2/10"></i><i class="s4" style="width:4%" title="交付可验收 2/10"></i>
       </div>
@@ -298,7 +299,7 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
     </div>
 
     <div class="row">
-      <div class="rname"><b>阿凯</b><small>无公司名</small></div>
+      <div class="rname"><b>阿凯</b><small>没给过公司名</small></div>
       <div class="bar" role="img" aria-label="阿凯 12 分：合同 4、交付 8">
         <i class="s2" style="width:8%" title="合同 4/10"></i><i class="s4" style="width:16%" title="交付可验收 8/10"></i>
       </div>
@@ -306,7 +307,7 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
     </div>
 
     <div class="row">
-      <div class="rname"><b>西北旅游领队-小唐</b><small>无公司名 · 与寻风小唐无关</small></div>
+      <div class="rname"><b>西北旅游领队-小唐</b><small>没给过公司名 · 与寻风小唐无关</small></div>
       <div class="bar" role="img" aria-label="小唐 9 分：付款 6、交付 2、口径 1">
         <i class="s3" style="width:12%" title="付款结构 6/10"></i><i class="s4" style="width:4%" title="交付可验收 2/10"></i><i class="s5" style="width:2%" title="口径诚实 1/5"></i>
       </div>
@@ -314,7 +315,7 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
     </div>
 
     <div class="boardfoot">
-      <strong>价格不计分。</strong>六家的天数、含几晚住宿、含不含首道门票、含不含景区小交通口径全不一样——统一之前，任何「谁更便宜」的排序都是编的。报价原文见下表。
+      <strong>价格不计分。</strong>各家的天数、含几晚住宿、含不含首道门票、含不含景区小交通口径全不一样——统一之前，任何「谁更便宜」的排序都是编的。报价原文见明细表。
     </div>
   </div>
 
@@ -330,68 +331,115 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
   <div class="rubric">
     <div class="rub"><span class="tag" style="background:var(--d1)"></span><div>
       <h4>主体可核验<span>×3 —— 出事之后你找谁</span></h4>
-      <p><b>5</b> 官方名录命中、许可证号可查、在业　<b>2</b> 给了机构名但名录 0 命中　<b>1</b> 给了机构名且多渠道全零　<b>0</b> 从未给过公司名（不是「查不到」，是没有可查的对象）</p>
+      <p><b>5</b> 政府名录命中、旅行社业务经营许可证号可查、在业　<b>2</b> 给了机构名但名录 0 命中　<b>1</b> 给了机构名且多渠道全零　<b>0</b> 从未给过公司名（不是「查不到」，是没有可查的对象）</p>
     </div></div>
     <div class="rub"><span class="tag" style="background:var(--d2)"></span><div>
       <h4>合同<span>×2 —— 承诺能不能变成可执行文本</span></h4>
-      <p><b>5</b> 正规电子合同、可在监管平台查编号　<b>3</b> 承诺签但形式含糊，或落地才签　<b>2</b> 口头称签电子合同却无资质支撑　<b>0</b> 全程未提</p>
+      <p><b>5</b> 已提供国家示范文本实体文件、带全国统一旅游电子合同编号　<b>3</b> 只承诺签、或落地才签　<b>2</b> 口头称签电子合同却无资质支撑　<b>0</b> 全程未提</p>
     </div></div>
     <div class="rub"><span class="tag" style="background:var(--d3)"></span><div>
       <h4>付款结构<span>×2 —— 钱在你手里待多久</span></h4>
-      <p><b>5</b> 分段付款、尾款落地后结、定金低且写明退还条件　<b>3</b> 定金低、转对公、口头称可退　<b>1</b> 定金最高且无退款条件　<b>0</b> 出发前先付大头</p>
+      <p><b>5</b> 分段付款、尾款落地后结、定金低且写明退还条件　<b>4</b> 定金低、转对公，但合同落地才签　<b>3</b> 定金低、口头称可退　<b>1</b> 定金最高且无退款条件　<b>0</b> 出发前先付大头</p>
     </div></div>
     <div class="rub"><span class="tag" style="background:var(--d4)"></span><div>
       <h4>交付可验收<span>×2 —— 有没有能写进合同的具体物</span></h4>
       <p><b>5</b> 逐日行程 ＋ 逐城具名酒店 ＋ 逐项门票与景交单价　<b>3–4</b> 三样里有一两样　<b>1</b> 只有可选池、没有承诺　<b>0</b> 什么都没有</p>
     </div></div>
     <div class="rub"><span class="tag" style="background:var(--d5)"></span><div>
-      <h4>口径诚实<span>×1 —— 书面和口头对不对得上</span></h4>
-      <p><b>扣</b> 书面与口头矛盾、虚构原价、反向涨价、稀缺话术、用国家示范文本禁用的「准 4 星」「豪华」描述住宿　<b>加</b> 主动披露不利事实、主动点破行业套路</p>
+      <h4>口径诚实<span>×1 —— 说的话经不经得起查</span></h4>
+      <p><b>扣</b> 书面与口头矛盾、虚构原价、反向涨价、稀缺话术、经查证不存在的荣誉、承诺物理上做不到的事　<b>加</b> 主动出示资质与合同、主动披露不利事实、主动点破行业套路</p>
     </div></div>
   </div>
 </section>
 
 <section id="r3">
-  <h2 class="sec">六家明细</h2>
+  <h2 class="sec">两家持牌社，怎么选</h2>
+  <p class="sec-note">这两家的资质都经政府原始文件确认过，剩下的是取舍，不是风险判断。</p>
+  <div class="twocol">
+    <div class="card good">
+      <h4>青海寻风国际旅行社 · 45 分</h4>
+      <ul>
+        <li><strong>许可证 <span class="mono">L-QH-100489</span></strong>，青海省文旅厅名录序号 144，在业，境内＋入境旅游业务。座机 <span class="mono">0971-3598024</span></li>
+        <li><strong>交付材料六家最全</strong>：4 页行程 PDF、12 页逐城具名酒店（带携程星级）、逐景点公布门票与景交单价</li>
+        <li><strong>付款最安全</strong>：200/位定金 → 落地付 50% → 最后一天付清，出发前两天有问题秒退</li>
+        <li><strong>唯一含境内个人意外险</strong>（其余只给旅行社责任险，那个不赔你自己摔的）</li>
+        <li>弱点：报的 5 天 4 晚是<strong>它自家最短 SKU</strong>，砍掉察尔汗与黑独山；合同只有口头承诺，<strong>没给过文本</strong></li>
+      </ul>
+    </div>
+    <div class="card good">
+      <h4>甘肃丝路环域旅游 · 41 分</h4>
+      <ul>
+        <li><strong>许可证 <span class="mono">L-GS-100815</span></strong>，甘肃省文旅厅名录（截至 2026-02-28）第 643 条；嘉峪关市文旅局 2024-04-23 设立公告载明业务范围「入境旅游业务，国内旅游业务」，法定代表人孟伟</li>
+        <li><strong>唯一交出合同实体文件的</strong>：25 页 <span class="mono">GF-2026-2401</span> 国家示范文本，抬头已填，带全国统一旅游电子合同编号 <span class="mono">ECGS260909TUU4K0</span></li>
+        <li><strong>价格最低</strong>：2380/人、6 天 5 晚、6 人独立成团；住宿老实写「三钻」不吹准四</li>
+        <li>公司信息：2021-03-17 成立，登记机关嘉峪关市市监局，信用代码 <span class="mono">91620200MA71UYC97C</span>，连续 5 年年报齐全，无处罚、无经营异常</li>
+        <li>弱点：<strong>酒店「不指定」、只给参考名单</strong>，没有逐项门票景交单价——交付这一栏最弱</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>丝路环域有三处要当面问清</h3>
+  <div class="twocol">
+    <div class="card warn">
+      <h4>已被证伪的一句话</h4>
+      <ul>
+        <li>港港说「规的旅行社<strong>好评榜排名前三</strong>」——<strong>不存在任何官方的旅行社好评榜</strong>。核查中拿一篇流传的「2026 甘肃旅行社榜单」去比对，其 TOP2–TOP10 共 9 家公司在甘肃省官方 1598 条名录中<strong>全部 0 命中</strong>。这句是纯营销话术，不能当加分项。</li>
+      </ul>
+    </div>
+    <div class="card warn">
+      <h4>一个没查干净的缺口</h4>
+      <ul>
+        <li>嘉峪关市文旅局 <strong>2026-05-07</strong> 曾公告责令 <strong>5 家</strong>旅行社限期补缴质量保证金／补投责任险，原页现已 404，只能确认其中 4 家，<strong>无法排除第 5 家就是它</strong>。同期该市长城假期旅行社已于 2026-06-16 被吊销许可证。<strong>直接问：你们的质量保证金缴了吗，能不能出具凭证？</strong></li>
+      </ul>
+    </div>
+    <div class="card warn">
+      <h4>一句物理上做不到的承诺</h4>
+      <ul>
+        <li>小杰说「全程<strong>不转包不外包</strong>」。但这家<strong>没有道路旅客运输资质</strong>，车必然来自外部持证客运企业——这句话在「车」这一项上不可能成立。要么改成「委托的地接社/车队名称与许可证号写进合同」，要么就别信这句。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>两个抬头，别写错</h4>
+      <ul>
+        <li>「<strong>自游行</strong>」在甘肃省 2757 条旅行社名录里 0 命中，它只是销售的自称品牌，<strong>不是可追责主体</strong>。合同甲方、收据抬头、收款账户名必须一律写「<strong>甘肃丝路环域旅游服务有限公司</strong>」。</li>
+        <li>注册资本 50 万是<strong>认缴</strong>（认缴期到 2051 年），实缴未公示——别指望它兜底。真正的保障是质量保证金和责任险。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="r4">
+  <h2 class="sec">五家明细</h2>
   <p class="sec-note">左侧竖条对应评分的第一个维度。价格栏只放各家报价原文，不做换算。</p>
   <div class="tablewrap">
     <table>
-      <thead><tr><th>销售</th><th>报价原文</th><th>主体</th><th>定金与付款</th><th>最该盯的那处</th></tr></thead>
+      <thead><tr><th>签约主体</th><th>报价原文</th><th>主体核验</th><th>定金与付款</th><th>最该盯的那处</th></tr></thead>
       <tbody>
         <tr>
-          <td class="who">寻风小唐<small>青甘五天四晚 · 拼团 4–8 人</small></td>
+          <td class="who">青海寻风国际旅行社<small>销售：寻风小唐 · 五天四晚 · 拼团 4–8 人</small></td>
           <td class="num"><b>A 3180</b><em>B 2980（含必要小交通）</em><em>C 2580（仅车＋酒店）</em><em>逐景点公布门票与景交单价</em></td>
           <td><div class="lic lic--ok"><span class="b"></span><span class="t">
-            青海寻风国际旅行社有限公司<br><code>L-QH-100489</code> · 在业<br>
-            <span style="color:var(--ink-3)">名录序号 144 · 0971-3598024</span></span></div></td>
-          <td class="flaw">200/位，<strong>三段式</strong>：定金 → 落地付 50% → 最后一天付清。出发前两天有问题秒退。正规电子合同。六家里唯一含<strong>个人意外险</strong>。</td>
-          <td class="flaw">5 天 4 晚是它自家<strong>最短的 SKU</strong>，砍掉察尔汗和黑独山——而它同时卖 6天5晚 和 7天6晚。<strong>直接要 6天5晚 重新报价。</strong>另：「自营车队」实为合作司机池，车型与领队出发前一天才定。</td>
+            <code>L-QH-100489</code> · 在业<br>青海省文旅厅名录序号 144<br>
+            <span style="color:var(--ink-3)">境内＋入境旅游业务 · 0971-3598024</span></span></div></td>
+          <td class="flaw">200/位，<strong>三段式</strong>：定金 → 落地付 50% → 最后一天付清。出发前两天有问题秒退。六家里唯一含<strong>个人意外险</strong>。</td>
+          <td class="flaw">5 天 4 晚是它自家<strong>最短 SKU</strong>，砍掉察尔汗与黑独山——它同时卖 6天5晚 和 7天6晚，<strong>直接要 6天5晚 重新报价。</strong>合同只有口头承诺、没给文本。「自营车队」实为合作司机池。</td>
         </tr>
         <tr>
-          <td class="who">西北领队港港<small>青甘 6 天 5 晚 · 6 人独立成团</small></td>
-          <td class="num"><b>2380</b><em>含 5 晚三钻＋行程景点门票</em><em>景区小交通明确自理</em></td>
+          <td class="who">甘肃丝路环域旅游<small>销售：港港＋小杰（同一家）· 6 天 5 晚 · 6 人独立成团</small></td>
+          <td class="num"><b>2380</b><em>港港报价</em><b>2480</b><em>小杰报价，设 9.14 截止</em><em>含 5 晚三钻＋行程景点门票；景交自理</em></td>
+          <td><div class="lic lic--ok"><span class="b"></span><span class="t">
+            <code>L-GS-100815</code> · 在业<br>甘肃省文旅厅名录第 643 条<br>
+            <span style="color:var(--ink-3)">嘉峪关市文旅局 2024-04-23 设立公告</span></span></div></td>
+          <td class="flaw">港港 100/人定金、转对公、可开收据、称随时可退，但<strong>合同落地西宁才签</strong>；小杰 200/人订金 ＋ <strong>落地后结尾款</strong>。<strong>要求按小杰的付款结构、按港港的价格。</strong></td>
+          <td class="flaw">已发来 <strong>25 页 GF-2026-2401 国家示范文本</strong>（带电子合同编号），这是六家里唯一的。但<strong>酒店「不指定」</strong>、无逐项景交单价；「好评榜前三」已证伪；「不转包不外包」在车这一项上做不到。</td>
+        </tr>
+        <tr>
+          <td class="who">德华<small>@喜致旅游 · 圆梦青甘 6 天 5 晚 · 称封顶 5 人</small></td>
+          <td class="num"><b>3480</b><em>3980−500；曾报 3080、砍到 3000</em><em>报价最高</em></td>
           <td><div class="lic lic--no"><span class="b"></span><span class="t">
-            签名「@自游行旅游」<br><strong>青海名录 0 命中</strong><br>
-            <span style="color:var(--ink-3)">全国同名持牌主体在新疆</span></span></div></td>
-          <td class="flaw">100/人，转对公账户、可开收据、称随时可退。但合同是<strong>落地西宁才签</strong>。</td>
-          <td class="flaw">报价最低且按 6 人算，住宿老实写「三钻」不吹准四，莫高窟票种讲得最细。但<strong>零可追溯履约记录</strong>，小红书对应账号处于平台风险标记状态。7 座车 6 客＋1 司机满座，<strong>行李没地方放</strong>。</td>
-        </tr>
-        <tr>
-          <td class="who">A西北旅游定制-小杰<small>西北 6 天 5 晚 · 6 人</small></td>
-          <td class="num"><b>2480</b><em>3 钻＋首晚 4 钻</em><em>明说「酒店不指定」</em></td>
-          <td><div class="lic lic--none"><span class="b"></span><span class="t">
-            <span class="pill">没给过公司名</span><br>
-            <span style="color:var(--ink-3)">不是查不到，是没有可查的对象</span></span></div></td>
-          <td class="flaw">订金 200/人 ＋ <strong>落地后结尾款</strong>。六家里付款结构最干净的一家。</td>
-          <td class="flaw">「酒店不指定」是诚实披露，但也意味着合同上无法约束。<strong>预订截止 9.14。</strong></td>
-        </tr>
-        <tr>
-          <td class="who">青甘定制师_德华<small>圆梦青甘 6 天 5 晚 · 称封顶 5 人</small></td>
-          <td class="num"><b>3480</b><em>3980−500；曾报 3080、砍到 3000</em><em>六家里报价最高</em></td>
-          <td><div class="lic lic--no"><span class="b"></span><span class="t">
-            签名「@喜致旅游」<br><strong>六条独立渠道全部 0 结果</strong><br>
+            <strong>六条独立渠道全部 0 结果</strong><br>
             <span style="color:var(--ink-3)">青海名录 / Bing / 微信公众号 / 小红书笔记 / 小红书用户 / 企业库</span></span></div></td>
-          <td class="flaw"><strong>300/人，六家最高</strong>，是最低档的 3 倍。材料里<strong>没有任何退款条件</strong>。用的是「定金」不是「订金」。</td>
+          <td class="flaw"><strong>300/人，最高</strong>，是最低档的 3 倍。材料里<strong>没有任何退款条件</strong>。用的是「定金」不是「订金」。</td>
           <td class="flaw">见下一节。</td>
         </tr>
         <tr>
@@ -401,10 +449,10 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
             <span class="pill">没给过公司名</span><br>
             <span style="color:var(--ink-3)">却自称签「全国旅游监管平台电子合同」</span></span></div></td>
           <td class="flaw"><strong>85% 先付</strong>＋15% 尾款称可拒付。按 6 人算敞口约 ¥12,240，换 ¥2,160 的事后议价权。</td>
-          <td class="flaw">交付材料其实最全（完整 D1–D6 行程 ＋ 5 家具名酒店），但书面末尾写「用房 <strong>5</strong> 晚」「D6 住：回程无安排」，口头却卖 7 天 6 晚。D5 贴士写「嘉峪关推荐门口打卡拍照更划算」——等于根本不进。</td>
+          <td class="flaw">交付材料其实很全（完整 D1–D6 行程 ＋ 5 家具名酒店），但书面末尾写「用房 <strong>5</strong> 晚」「D6 住：回程无安排」，口头却卖 7 天 6 晚。D5 贴士写「嘉峪关推荐门口打卡拍照更划算」——等于根本不进。</td>
         </tr>
         <tr>
-          <td class="who">西北旅游领队-小唐<small>豪华青甘 6 天 5 晚</small></td>
+          <td class="who">西北旅游领队-小唐<small>豪华青甘 6 天 5 晚 · 与寻风小唐无关</small></td>
           <td class="num"><b>2580</b><em>原价 3080 −500</em><em>话术「名额剩最后 10 个」</em></td>
           <td><div class="lic lic--none"><span class="b"></span><span class="t">
             <span class="pill">没给过公司名</span><br>
@@ -417,9 +465,9 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
   </div>
 </section>
 
-<section id="r4">
+<section id="r5">
   <h2 class="sec">德华：为什么 13 分</h2>
-  <p class="sec-note">这家目前是群里的意向。每条都有可追溯来源。</p>
+  <p class="sec-note">这家曾是群里的意向。每条都有可追溯来源。</p>
   <div class="dossier">
     <header>
       <h3>报价最高、定金最高、主体六渠道零结果</h3>
@@ -428,7 +476,7 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
     <ol>
       <li><strong>群里对它的好感，很可能是买来的。</strong>小红书两篇「极力推荐我和朋友报的青甘大环线团」——5 粉丝湖南 IP 与 1 粉丝北京 IP，发帖 09-10、09-11，<strong>正是德华进群的同一周</strong>。同一模板：都声明「粉丝这么少接不了广告」、都不写公司名不写价格、评论区清一色「求推」，博主一律回「欧克」导私信。另有真实客人在避雷帖评论区说：「评论下面找的，说去过不踩雷可以推，应该是广告吧」。</li>
       <li><strong>「青甘旅游定制师_德华」是批量马甲号命名模板。</strong>小红书搜同格式返回一整排——菲菲、小海、卓玛、小马、琳琳、诗沁……几乎全是 <span class="mono">0</span> 笔记、<span class="mono">0–2</span> 粉丝。这个身份<strong>没有口碑成本，出问题随时弃号重开</strong>。</li>
-      <li><strong>「圆梦青甘」在任何 OTA 上都不存在。</strong>没有第三方点评，没有历史成团记录——所有质量承诺只能靠合同兜底。</li>
+      <li><strong>「圆梦青甘」在任何 OTA 上都不存在。</strong>没有第三方点评，没有历史成团记录——所有质量承诺只能靠合同兜底，而它连公司名都给不出。</li>
       <li><strong>主打的「随车无人机」在主要景点全部禁飞。</strong>两位博主实地核对告示牌：青海湖二郎剑、鸣沙山月牙泉、莫高窟、嘉峪关关城、张掖七彩丹霞 <span class="pill">全禁</span>。可飞的只有茶卡（需报备）和大柴旦翡翠湖。</li>
       <li><strong>腾势 D9 装不下你们。</strong>七座版 6 客＋1 司机正好坐满，行李没地方放。而它自己说「封顶 5 人纯玩小团」——你们 6 个，这句话逻辑上就不成立。</li>
       <li><strong>27 小时内三个价：3080 → 3000 → 「预售 3980−500＝3480」。</strong>那个「原价 3980」在任何渠道都没出现过。他自己报过 3080，就说明 3080 做得下来。</li>
@@ -436,55 +484,55 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
   </div>
 </section>
 
-<section id="r5">
+<section id="r6">
   <h2 class="sec">比选团更急的三件事</h2>
   <p class="sec-note">选团可以多聊两天，下面三件过期就没了。</p>
   <div class="clock">
     <div class="tick">
       <span class="when">窗口已过 · 只剩回流</span>
       <span class="what">莫高窟票</span>
-      <span class="why">可预约 30 天内的票，每天 <span class="mono">7:00</span> 新放的只是第 30 天——今天放的是 <span class="mono">10-13</span>，<strong>为抢国庆定闹钟没有意义</strong>。只能在 <span class="mono">07:00–22:00</span> 多刷目标日等退票回流，或把 <span class="mono">100</span> 元应急票当保底。<strong>六家团没有一家包它。</strong></span>
+      <span class="why">可预约 30 天内的票，每天 <span class="mono">7:00</span> 新放的只是第 30 天——今天放的是 <span class="mono">10-13</span>，<strong>为抢国庆定闹钟没有意义</strong>。只能在 <span class="mono">07:00–22:00</span> 多刷目标日等退票回流，或把 <span class="mono">100</span> 元应急票当保底。<strong>五家团没有一家包它。</strong></span>
     </div>
     <div class="tick">
       <span class="when">09-14 · 明天</span>
-      <span class="what">小杰的预订截止日</span>
-      <span class="why">他写「预定时间：9.14 之前，预售价格 2480/人（6人）」。过了这天是涨价还是作废没说。今天问死，或者当它出局——别让它变成明天被迫做决定的那一个。</span>
+      <span class="what">小杰的「预订截止日」</span>
+      <span class="why">他写「9.14 之前，预售价格 2480/人」。但<strong>同一家公司的港港报 2380 且没有截止日</strong>——两套条件不可能同时是公司政策。让公司出一份盖章的统一报价单，在那之前这个日期不构成任何付款理由。</span>
     </div>
     <div class="tick">
       <span class="when">09-16 · 后天</span>
       <span class="what">火车票开抢</span>
-      <span class="why">09-30 出发的票 09-16 放。但顺序应该是<strong>先定团再买票</strong>——团定死了日期和集合地，大交通才有得买；反过来先抢票，等于把自己钉在某个日期上。</span>
+      <span class="why">09-30 出发的票 09-16 放。顺序应该是<strong>先定团再买票</strong>——团定死了日期和集合地，大交通才有得买；反过来先抢票，等于把自己钉在某个日期上。</span>
     </div>
   </div>
 
   <h3>还有一笔账：天数对不上</h3>
-  <p>2026 国庆假期是 <span class="mono">10/1–10/7</span>，<strong><span class="mono">10/8</span> 是工作日</strong>（国办发明电〔2025〕7 号）。所以 10/08 返程<strong>全程高速收费</strong>、10/07 当晚西宁房价已回落、10/08 的机票火车票比 10/07 便宜。而你们的窗口是 <strong>8 天 7 晚</strong>，团却是 6 天 5 晚 / 5 天 4 晚——<strong>多出来的 10/07 那晚住宿和 10/08 一整天，六家报价里一分钱都没有。</strong>建议团期排 <span class="mono">10/02–10/07</span>，10/01 只做西宁集结。</p>
+  <p>2026 国庆假期是 <span class="mono">10/1–10/7</span>，<strong><span class="mono">10/8</span> 是工作日</strong>（国办发明电〔2025〕7 号）。所以 10/08 返程<strong>全程高速收费</strong>、10/07 当晚西宁房价已回落、10/08 的机票火车票比 10/07 便宜。而你们的窗口是 <strong>8 天 7 晚</strong>，团却是 6 天 5 晚 / 5 天 4 晚——<strong>多出来的 10/07 那晚住宿和 10/08 一整天，报价里一分钱都没有。</strong>建议团期排 <span class="mono">10/02–10/07</span>，10/01 只做西宁集结。</p>
 </section>
 
-<section id="r6">
+<section id="r7">
   <h2 class="sec">付钱前按顺序做完这几步</h2>
   <p class="sec-note">这是执行顺序——第 1 步没过，后面都不用做。</p>
   <div class="steps">
-    <div class="step"><b>要两证，然后自己去查</b>
-      <span>营业执照 ＋ 旅行社业务经营许可证清晰照（两证同名同主体）。微信搜小程序「全国旅游监管服务」→ 旅行社查询 → 输入公司全称或许可证号。看三点：经营状态须<strong>正常存续</strong>、经营范围须含<strong>境内旅游业务</strong>、名称与营业执照<strong>一字不差</strong>。查不到就到此为止。</span></div>
-    <div class="step"><b>让六家按同一张清单重报</b>
-      <span>要求每家书面回答同样几项：<strong>几天几晚、含几晚住宿、逐晚酒店全名、含哪些景区的首道门票、哪些景区小交通是「不坐进不去」的必消项及各多少钱、由谁承担</strong>。拿到之后才谈贵贱——含票与不含票的两家直接比数字，排序会整个翻转。</span></div>
+    <div class="step"><b>要两张证，分清是哪两张</b>
+      <span><strong>营业执照</strong>由市场监管部门发，只证明公司合法存在；<strong>旅行社业务经营许可证</strong>由文旅部门发，才是能合法组织旅游的资格。<strong>有前者不等于有后者</strong>——这是本案最容易犯的错。两证的企业名称必须逐字一致，业务范围须含「国内旅游业务」。拿到后在微信小程序「全国旅游监管服务」→ 旅行社查询里自己核一遍。</span></div>
+    <div class="step"><b>让两家按同一张清单重报</b>
+      <span>要求各自书面回答：<strong>几天几晚、含几晚住宿、逐晚酒店全名、含哪些景区的首道门票、哪些景区小交通是「不坐进不去」的必消项及各多少钱、由谁承担</strong>。拿到之后才谈贵贱——含票与不含票的两家直接比数字，排序会整个翻转。对丝路环域还要加一句：<strong>请公司出具一份盖章的统一报价单</strong>，两个销售两个价的情况必须由公司定调。</span></div>
     <div class="step"><b>先签合同，再谈定金</b>
-      <span>用 2026 版《团队境内旅游合同》示范文本 <span class="mono">GF-2026-2401</span>。第十二条：<strong>行程开始前 7 日以上退团，退还全部费用、扣 0%</strong>——今天到 9/24 都在这个窗口里。对方拿出自制合同、或删改违约责任章节，就是明确的减分信号。</span></div>
+      <span>用 2026 版《团队境内旅游合同》示范文本 <span class="mono">GF-2026-2401</span>。丝路环域已经发来了这份文本，<strong>寻风也要按同一份出</strong>。第十二条：<strong>行程开始前 7 日以上退团，退还全部费用、扣 0%</strong>——今天到 9/24 都在这个窗口里。把「落地才签」改成「合同文本电子签或书面确认后再付定金」。</span></div>
     <div class="step"><b>把「准 4 星」逐条换成酒店名</b>
-      <span>示范文本<strong>附件 2 明文禁止</strong>「准 4 星」「豪华」这类行程单用语——六家全部命中。把这段截图发过去，要求按<strong>酒店全名 ＋ 星级逐晚</strong>写进行程单。谁能照办，谁就真锁了房；谁打太极，说明房根本没定。</span></div>
+      <span>示范文本<strong>附件 2 明文禁止</strong>「准 4 星」「豪华」这类行程单用语。要求按<strong>酒店全名 ＋ 星级逐晚</strong>写进行程单。丝路环域的「酒店不指定」正卡在这里——谁能把六晚的名字写死，谁就真锁了房。</span></div>
     <div class="step"><b>车要看资质，不是看座位数</b>
-      <span>要三样：<strong>行驶证使用性质为「营运」、车辆道路运输证、驾驶员道路旅客运输从业资格证</strong>。非营运车拉客出事，商业险可能拒赔——这是六个人里唯一无法用钱弥补的风险。座位数只影响一件事：国庆高速免费只给<strong>7 座及以下</strong>（10/1 00:00–10/7 24:00），9 座不免；10/08 已在假期外，<strong>全程收费</strong>。车牌号和「独立成团、不并团，如并团每人退 XXX 元」一起写进合同。</span></div>
-    <div class="step"><b>钱只进对公账户</b>
-      <span>户名必须与合同甲方、许可证名称<strong>三者一字不差</strong>。要发票，不要只要收据——收据只能证明钱付了，证明不了这是经营性旅游服务收入。另把「定金」改成「订金」，或在合同里写明无条件退还的条件与日期。</span></div>
+      <span>要三样：<strong>行驶证使用性质为「营运」、车辆道路运输证、驾驶员道路旅客运输从业资格证</strong>。非营运车拉客出事，商业险可能拒赔——这是唯一无法用钱弥补的风险。两家都没有自己的道路客运资质，车必然外包，所以<strong>要求把承运车队/地接社名称与许可证号写进合同</strong>，比听「不转包」这句话有用。座位数只影响一件事：国庆高速免费只给 7 座及以下（10/1 00:00–10/7 24:00），9 座不免；10/08 已在假期外，全程收费。</span></div>
+    <div class="step"><b>钱只进对公账户，抬头写公司全称</b>
+      <span>户名必须与合同甲方、许可证名称<strong>三者一字不差</strong>——<strong>不能写「自游行旅游」，那不是登记主体</strong>。要发票，不要只要收据。另把「定金」改成「订金」，或在合同里写明无条件退还的条件与日期。若对方坚持用个人收款码，该选项直接降级。</span></div>
     <div class="step"><b>用这道题验他们是不是真在跑这条线</b>
       <span><strong>「10 月最后一天，扁都口能不能走？」</strong>——G227 扁都口至峨堡段在你们出行期内是<strong>封闭</strong>的（连携程系商品页都写着「因 227 国道封路」），而寻风、阿凯、港港三家的最后一天行程都还写着「张掖—扁都口—祁连」，是同一份过期模板。答得出绕行方案（经武威，或二尕公路经祁连）的是真在跑线的。顺便要求书面给出改后的当日里程、时长、抵达西宁的最晚时间。</span></div>
   </div>
 </section>
 
-<section id="r7">
+<section id="r8">
   <h2 class="sec">莫高窟：怎么弄到票</h2>
-  <p class="sec-note">六家团没有一家包它，无论选谁这件事都要自己做。</p>
+  <p class="sec-note">没有一家团包它，无论选谁这件事都要自己做。</p>
   <div class="panel">
     <p><strong>票价（旺季 4/1–11/30，覆盖全程）：</strong>正常参观 全价 <span class="mono">238</span>／优惠 <span class="mono">148</span>，含数字电影 ＋ <strong>8 个实体洞窟</strong>，单日限 <span class="mono">6000</span> 张。应急参观 全价 <span class="mono">100</span>／优惠 <span class="mono">55</span>，只有 <strong>4 个洞窟</strong>、无数字电影，单日限 <span class="mono">12000</span> 张。</p>
     <p><strong>优惠票你们大概率符合：</strong>国内全日制统招<strong>在读硕士研究生及以下</strong>（博士不享受；成教、自考、进修、网络教育不享受），须带证件原件。</p>
@@ -495,22 +543,23 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
   </div>
 </section>
 
-<section id="r8">
+<section id="r9">
   <h2 class="sec">这份东西该怎么读</h2>
   <div class="sources">
     <ul>
-      <li><strong>小红书的口碑不能用来排序。</strong>这条线上正面帖和负面帖<strong>都在批量投流</strong>——已找到两组不同作者、不同价格、相隔 25 天但正文逐句相同的「避雷帖」。所以评分榜里没有「口碑」这一项。以后就算搜到「喜致旅游好评」，也不能作为翻案理由。</li>
-      <li><strong>「查不到」有两种，别混。</strong>「喜致」「自游行」在<strong>青海省文旅厅 733 家名录</strong>里 0 命中是确定的（逐条解析原文得出）；但全国平台和工商登记<strong>没能实测</strong>——查询用的网络出口在境外，相关站点全部拒绝访问。<strong>在国内用微信小程序补查一次，2 分钟就能把这条变成完全确定。</strong></li>
-      <li><strong>寻风那条最实的凭据：</strong><span class="mono">L-QH-100489</span> 来自青海省文旅厅《青海省旅行社名录》（2026-03-27，733 家 / 730 个许可证号）逐条解析，序号 144，不是商家自制图片。<strong>未验证的是：微信上那个「寻风小唐」是不是这家公司的人。</strong>打 <span class="mono">0971-3598024</span> 问一句就能解决。注意「寻风小唐」和「西北旅游领队-小唐」是两个人。</li>
-      <li><strong>为什么没推荐走携程/飞猪：</strong>查过了，不是捷径。「携程自营」是<strong>品牌标签不是经营主体</strong>——列表页自己逐条公示「委托社：牧云甘青 / 青海锐久国旅 / 369旅行」，执行方还是这批本地地接社；平台上也<strong>买不到整车包车</strong>，公开商品全是拼团（行程页原文「乘车座位按 Z 字形轮换，每日调换」）。「先行赔付」在规章里是<strong>「鼓励」不是强制</strong>。<strong>但它的商品页值得当尺子</strong>：几天几晚、含几晚住、含不含首道门票、能不能退、退多少全写死了——拿那张清单去要求六家重报。</li>
-      <li><strong>住宿这条可以放心：</strong>「德令哈、大柴旦国庆没房」<strong>不成立</strong>。实测大柴旦 10/04 仍有三钻在售（¥573 / ¥581 / ¥648），德令哈 10/03 有 9 家挂 ¥381–733。但这三个小城是全线涨得最凶的三晚——大柴旦对同星期平季约 <span class="mono">3.0–3.2×</span>，茶卡约 <span class="mono">2.3–4.3×</span>。以上均为「当日最低房型起价」，6 人订 3 间只会更高。</li>
-      <li><strong>官方最近一次提醒说的就是这个场景。</strong>2026-08-05 兰州市文旅局撤销 9 家旅行社许可，原文：「报名参团务必查验旅行社《营业执照》与《旅行社业务经营许可证》原件，核对许可号与经营范围，<strong>切勿通过个人微信、短视频私信向无资质主体转账参团</strong>。」该局今年以来已撤销 48 家。</li>
+      <li><strong>营业执照 ≠ 旅行社资质。</strong>这是全篇最该记住的一句。前者由市场监管部门发，后者由文旅部门发。丝路环域<strong>两张都有</strong>（<span class="mono">91620200MA71UYC97C</span> ／ <span class="mono">L-GS-100815</span>），但六个人里大概率有人会把「对方发了执照」当成「有资质」——不是的。</li>
+      <li><strong>一条无效推理，别再用。</strong>此前曾以「自游行在青海省名录 0 命中」当作减分——那是错的：这家公司注册在<strong>甘肃嘉峪关</strong>，拿青海名录去否定一家甘肃旅行社推不出任何结论。国内旅游业务不按省份限定经营地域，甘肃持证社可以合法组织含青海段的行程。</li>
+      <li><strong>两家持牌社的凭据来源：</strong>寻风来自青海省文旅厅《青海省旅行社名录》（2026-03-27，733 家）序号 144；丝路环域来自甘肃省文旅厅《甘肃省旅行社名录》（截至 2026-02-28，1598 条）第 643 条，并有嘉峪关市文旅局 2024-04-23 设立公告互证，地址逐字一致。<strong>都是政府原始文件，不是商家自制图片。</strong></li>
+      <li><strong>还没查干净的一处：</strong>嘉峪关市文旅局 2026-05-07 责令 5 家旅行社补缴质量保证金的公告原页已 404，只确认了其中 4 家，<strong>无法排除第 5 家是丝路环域</strong>。这条要当面问，不是背后猜。</li>
+      <li><strong>小红书的口碑不能用来排序。</strong>这条线上正面帖和负面帖<strong>都在批量投流</strong>——已找到两组不同作者、不同价格、相隔 25 天但正文逐句相同的「避雷帖」。所以评分榜里没有「口碑」这一项。同理，市面上那些「2026 甘肃/青海旅行社榜单 TOP10」也已被实测证伪：某篇榜单的 TOP2–TOP10 共 9 家，在官方 1598 条名录里<strong>全部 0 命中</strong>。</li>
+      <li><strong>为什么没推荐走携程/飞猪：</strong>查过了，不是捷径。「携程自营」是<strong>品牌标签不是经营主体</strong>——列表页自己逐条公示「委托社：牧云甘青 / 青海锐久国旅 / 369旅行」；平台上也<strong>买不到整车包车</strong>，公开商品全是拼团（行程页原文「乘车座位按 Z 字形轮换，每日调换」）。「先行赔付」在规章里是<strong>「鼓励」不是强制</strong>。但它的商品页值得当尺子：几天几晚、含几晚住、含不含首道门票、能不能退、退多少全写死了。</li>
+      <li><strong>住宿可以放心：</strong>「德令哈、大柴旦国庆没房」<strong>不成立</strong>。实测大柴旦 10/04 仍有三钻在售（¥573 / ¥581 / ¥648），德令哈 10/03 有 9 家挂 ¥381–733。但这三个小城是全线涨得最凶的三晚——大柴旦对同星期平季约 <span class="mono">3.0–3.2×</span>，茶卡约 <span class="mono">2.3–4.3×</span>。以上均为「当日最低房型起价」，6 人订 3 间只会更高。</li>
     </ul>
   </div>
 </section>
 
 <footer>
-  核查方法：群内六家转发记录逐条读取（含全部笔记卡与两份 PDF）；三轮独立调查共 36 个单元，每条结论配一名独立复核者尝试反驳，复核推翻的一律以复核为准。主体资质以政府公开名录原文为准；口碑类材料不进评分。数据截至 2026-09-13。
+  核查方法：群内转发记录逐条读取（含全部笔记卡、寻风两份 PDF 与丝路环域合同模板 PDF）；四轮独立调查共 44 个单元，每条结论配一名独立复核者尝试反驳，复核推翻的一律以复核为准。资质以政府原始公告与省级名录原文为准；口碑类材料不进评分。数据截至 2026-09-13。
 </footer>
 
 </main>
